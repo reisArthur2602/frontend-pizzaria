@@ -1,7 +1,8 @@
 import React from "react";
+import FormRegister from "../shared/components/form-register";
 
 const Register = () => {
-  return <div>Register</div>;
+  return <FormRegister />;
 };
 
 export default Register;

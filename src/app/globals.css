@@ -30,7 +30,6 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
   }
-
 }
 
 @layer base {
@@ -38,11 +37,12 @@
     @apply border-border;
   }
 
-  body,html {
+  body,
+  html {
     @apply h-full;
   }
 
   body {
-    @apply bg-background text-foreground font-medium;
+    @apply bg-background text-foreground;
   }
 }
