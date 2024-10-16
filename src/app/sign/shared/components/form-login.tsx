@@ -26,7 +26,7 @@ const FormLogin = () => {
     }
 
     toast.success(response.body);
-    router.replace("/sign");
+    router.replace("/dashboard");
   });
 
   return (
