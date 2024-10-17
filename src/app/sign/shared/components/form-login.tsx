@@ -51,7 +51,7 @@ const FormLogin = () => {
         type="password"
         {...form.register("password")}
       />
-      <Button>Cadastrar</Button>
+      <Button>Acessar</Button>
       <Link
         href="/sign/register"
         className="text-center text-sm transition-all hover:text-primary"
