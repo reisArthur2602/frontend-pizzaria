@@ -1,8 +1,11 @@
 import React from "react";
 import DialogCreateCategory from "../shared/components/dialog-create-category";
 import TableCategory from "../shared/components/table-category";
+import { GetCategory } from "../shared/services/get-category";
 
-const Category = () => {
+const Category = async () => {
+  const categories = await GetCategory();
+
   return (
     <div>
       <section className="mb-9 flex justify-between">
@@ -13,7 +16,7 @@ const Category = () => {
         <DialogCreateCategory />
       </section>
 
-      <TableCategory />
+      <TableCategory categories={categories} />
     </div>
   );
 };

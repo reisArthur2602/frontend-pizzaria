@@ -8,8 +8,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Ellipsis } from "lucide-react";
+import { IGetCategoryResponse } from "../services/get-category";
 
-const TableCategory = () => {
+interface ITableCategory {
+  categories: IGetCategoryResponse[] | [];
+}
+
+const TableCategory = ({ categories }: ITableCategory) => {
   return (
     <Table>
       <TableCaption>Categorias cadastradas no sistema</TableCaption>
@@ -24,16 +29,24 @@ const TableCategory = () => {
       </TableHeader>
 
       <TableBody>
-        <TableRow>
-          <TableCell>3bb4ebdd-d1a4-42f0-8aa2-c616444932e4</TableCell>
-          <TableCell>pizza</TableCell>
-          <TableCell>2024-10-11</TableCell>
-          <TableCell>
-            <button>
-              <Ellipsis />
-            </button>
-          </TableCell>
-        </TableRow>
+        {categories.map((category) => (
+          <>
+            <TableRow key={category.id}>
+              <TableCell>{category.id}</TableCell>
+              <TableCell>{category.name}</TableCell>
+              <TableCell>
+                {new Intl.DateTimeFormat("pt-br").format(
+                  new Date(category.created_at),
+                )}
+              </TableCell>
+              <TableCell>
+                <button>
+                  <Ellipsis />
+                </button>
+              </TableCell>
+            </TableRow>
+          </>
+        ))}
       </TableBody>
     </Table>
   );

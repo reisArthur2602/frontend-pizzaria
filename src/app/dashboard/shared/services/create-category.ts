@@ -2,6 +2,7 @@
 
 import { api } from "@/lib/axios-config";
 import { AxiosError } from "axios";
+import { revalidatePath } from "next/cache";
 
 export interface ICreateCategoryRequest {
   name: string;
@@ -10,6 +11,8 @@ export interface ICreateCategoryRequest {
 export const CreateCategory = async (credentials: ICreateCategoryRequest) => {
   try {
     await api.post("/category", credentials);
+
+    revalidatePath("/dashboard/category");
 
     return {
       sucess: true,
