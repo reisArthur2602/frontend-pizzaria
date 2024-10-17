@@ -1,6 +1,6 @@
 import React from "react";
-import DialogCreateCategory from "../shared/components/dialog-create-category";
-import TableCategory from "../shared/components/table-category";
+import DialogCreateCategory from "../shared/components/category/dialog-create-category";
+import TableCategory from "../shared/components/category/table-category";
 import { GetCategory } from "../shared/services/get-category";
 
 const Category = async () => {

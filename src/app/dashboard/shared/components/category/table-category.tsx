@@ -7,8 +7,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Ellipsis } from "lucide-react";
-import { IGetCategoryResponse } from "../services/get-category";
+
+import { IGetCategoryResponse } from "../../services/get-category";
+
+import { formatDate } from "../../utils/format-date";
+import RemoveCategoryTable from "./remove-category-table";
 
 interface ITableCategory {
   categories: IGetCategoryResponse[] | [];
@@ -30,22 +33,14 @@ const TableCategory = ({ categories }: ITableCategory) => {
 
       <TableBody>
         {categories.map((category) => (
-          <>
-            <TableRow key={category.id}>
-              <TableCell>{category.id}</TableCell>
-              <TableCell>{category.name}</TableCell>
-              <TableCell>
-                {new Intl.DateTimeFormat("pt-br").format(
-                  new Date(category.created_at),
-                )}
-              </TableCell>
-              <TableCell>
-                <button>
-                  <Ellipsis />
-                </button>
-              </TableCell>
-            </TableRow>
-          </>
+          <TableRow key={category.id}>
+            <TableCell>{category.id}</TableCell>
+            <TableCell>{category.name}</TableCell>
+            <TableCell>{formatDate(category.created_at)}</TableCell>
+            <TableCell>
+              <RemoveCategoryTable id={category.id} />
+            </TableCell>
+          </TableRow>
         ))}
       </TableBody>
     </Table>
