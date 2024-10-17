@@ -9,7 +9,7 @@ const DashboardLayout = ({ children }: IDashboardLayout) => {
   return (
     <div className="flex h-full flex-col">
       <HeaderDashboard />
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 p-8">{children}</main>
     </div>
   );
 };
