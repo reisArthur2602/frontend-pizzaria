@@ -2,11 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { api } from "./lib/axios-config";
 import { AxiosError } from "axios";
 
-const getUser = async (token: string) => {
+const getUser = async () => {
   try {
-    await api.get("/user/details", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    await api.get("/user/details");
     return { authorized: true };
   } catch (error) {
     if (error instanceof AxiosError) {
@@ -30,7 +28,7 @@ export const middleware = async (request: NextRequest) => {
   }
 
   // Se o token existir, valide o usuário
-  const response = await getUser(token);
+  const response = await getUser();
 
   // Se o token for inválido, redirecione para "/sign" apenas se o usuário não estiver já na página de "/sign"
   if (!response?.authorized && request.nextUrl.pathname !== "/sign") {
