@@ -12,6 +12,8 @@ import { formatDate } from "../../utils/format-date";
 import { IGetOrderCompleted } from "../../services/order/get-order-completed";
 import { formatPrice } from "../../utils/format-price";
 import { calculateTotalItemsOrder } from "../../utils/calculate-total-items-order";
+import RemoveOrderTable from "./remove-order-table";
+import DialogViewOrder from "./dialog-view-order";
 
 interface ITableOrder {
   orders: IGetOrderCompleted[] | [];
@@ -41,7 +43,12 @@ const TableOrder = ({ orders }: ITableOrder) => {
             <TableCell>
               {formatPrice(calculateTotalItemsOrder(order))}
             </TableCell>
-            <TableCell>Ações</TableCell>
+            <TableCell>
+              <div className="flex items-center gap-3">
+                <RemoveOrderTable id={order.id} />
+                <DialogViewOrder order={order} />
+              </div>
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
