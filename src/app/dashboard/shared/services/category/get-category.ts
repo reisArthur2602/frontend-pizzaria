@@ -10,6 +10,6 @@ export interface IGetCategoryResponse {
 }
 
 export const GetCategory = async () => {
-  const response = await api.get<IGetCategoryResponse[]>("/category");
+  const response = await api.get<IGetCategoryResponse[] | []>("/category");
   return response.data;
 };
