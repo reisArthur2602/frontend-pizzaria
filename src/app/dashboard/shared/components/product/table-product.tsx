@@ -14,6 +14,7 @@ import { formatPrice } from "../../utils/format-price";
 import { Badge } from "@/components/ui/badge";
 import RemoveProductTable from "./remove-product-table";
 import Image from "next/image";
+import DialogViewProduct from "./dialog-view-product";
 
 interface ITableProduct {
   products: IGetProductResponse[] | [];
@@ -55,7 +56,10 @@ const TableProduct = ({ products }: ITableProduct) => {
             </TableCell>
             <TableCell>{formatDate(product.created_at)}</TableCell>
             <TableCell>
-              <RemoveProductTable id={product.id} />
+              <div className="flex items-center gap-3">
+                <RemoveProductTable id={product.id} />
+                <DialogViewProduct product={product} />
+              </div>
             </TableCell>
           </TableRow>
         ))}
