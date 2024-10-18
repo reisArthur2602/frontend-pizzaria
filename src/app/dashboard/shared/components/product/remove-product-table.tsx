@@ -13,16 +13,16 @@ import {
 import { Trash2 } from "lucide-react";
 
 import React from "react";
-import { DeleteCategory } from "../../services/category/delete-category";
 import { toast } from "sonner";
+import { DeleteProduct } from "../../services/product/delete-product";
 
-interface IRemoveCategoryTable {
+interface IRemoveProductTable {
   id: string;
 }
 
-const RemoveCategoryTable = ({ id }: IRemoveCategoryTable) => {
-  const handleDeleteCategory = async (id: string) => {
-    const response = await DeleteCategory({ id });
+const RemoveProductTable = ({ id }: IRemoveProductTable) => {
+  const handleDeleteProduct = async (id: string) => {
+    const response = await DeleteProduct({ id });
     if (response) {
       if (!response.sucess) {
         return toast.error(response.body);
@@ -43,14 +43,14 @@ const RemoveCategoryTable = ({ id }: IRemoveCategoryTable) => {
         <AlertDialogHeader>
           <AlertDialogTitle>Você tem certeza absoluta?</AlertDialogTitle>
           <AlertDialogDescription>
-            Esta ação não pode ser desfeita. Isso excluirá permanentemente a
-            categoria e todos os produtos associados a ela de nossos servidores.
+            Esta ação não pode ser desfeita. Isso excluirá permanentemente o
+            produto de nossos servidores.
           </AlertDialogDescription>
         </AlertDialogHeader>
 
         <AlertDialogFooter>
           <AlertDialogCancel>Cancelar</AlertDialogCancel>
-          <AlertDialogAction onClick={() => handleDeleteCategory(id)}>
+          <AlertDialogAction onClick={() => handleDeleteProduct(id)}>
             Continuar
           </AlertDialogAction>
         </AlertDialogFooter>
@@ -59,4 +59,4 @@ const RemoveCategoryTable = ({ id }: IRemoveCategoryTable) => {
   );
 };
 
-export default RemoveCategoryTable;
+export default RemoveProductTable;
