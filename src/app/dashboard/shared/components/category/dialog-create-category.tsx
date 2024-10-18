@@ -18,7 +18,7 @@ import { useForm } from "react-hook-form";
 import {
   CreateCategory,
   ICreateCategoryRequest,
-} from "../../services/create-category";
+} from "../../services/category/create-category";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerCategorySchema } from "../../lib/zod/register-category-schema";
 import { toast } from "sonner";

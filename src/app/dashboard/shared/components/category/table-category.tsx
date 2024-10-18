@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { IGetCategoryResponse } from "../../services/get-category";
+import { IGetCategoryResponse } from "../../services/category/get-category";
 
 import { formatDate } from "../../utils/format-date";
 import RemoveCategoryTable from "./remove-category-table";

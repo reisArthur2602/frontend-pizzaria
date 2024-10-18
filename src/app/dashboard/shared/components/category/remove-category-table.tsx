@@ -13,7 +13,7 @@ import {
 import { Trash2 } from "lucide-react";
 
 import React from "react";
-import { DeleteCategory } from "../../services/delete-category";
+import { DeleteCategory } from "../../services/category/delete-category";
 import { toast } from "sonner";
 
 interface IRemoveCategoryTable {
