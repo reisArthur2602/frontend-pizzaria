@@ -1,9 +1,13 @@
 import React from "react";
 import DialogCreateProduct from "../shared/components/product/dialog-create-product";
 import { GetCategory } from "../shared/services/category/get-category";
+import { GetProduct } from "../shared/services/product/get-product";
+import TableProduct from "../shared/components/product/table-product";
 
 const Product = async () => {
   const categories = await GetCategory();
+  const products = await GetProduct();
+
   return (
     <div>
       <section className="mb-9 flex justify-between">
@@ -13,6 +17,7 @@ const Product = async () => {
         </div>
         <DialogCreateProduct categories={categories} />
       </section>
+      <TableProduct products={products} />
     </div>
   );
 };
