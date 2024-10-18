@@ -8,7 +8,7 @@ interface IOrderRecents {
 export const OrderRecents = ({ count }: IOrderRecents) => {
   return (
     <div className="relative">
-      <Link href={"/dashboard/order/recents"}>
+      <Link href={"/dashboard"}>
         <BellIcon size={28} />
       </Link>
 
