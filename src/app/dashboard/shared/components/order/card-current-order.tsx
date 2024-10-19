@@ -10,12 +10,14 @@ import { IGetOrderCurrent } from "../../services/order/get-order-current";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { Button } from "@/components/ui/button";
-import { Check, Printer } from "lucide-react";
+import { Printer } from "lucide-react";
 import { calculateTotalItemsOrder } from "../../utils/calculate-total-items-order";
 import { Badge } from "@/components/ui/badge";
 import { formatPrice } from "../../utils/format-price";
 import CardItem from "../card-item";
 import RemoveOrderButton from "./remove-order-button";
+
+import FinishOrderButton from "./finish-order-button";
 
 interface ICardCurrentOrder {
   order: IGetOrderCurrent;
@@ -40,13 +42,7 @@ const CardCurrentOrder = ({ order }: ICardCurrentOrder) => {
 
           <div className="flex items-center gap-3">
             <RemoveOrderButton id={order.id} />
-            <Button
-              variant={"secondary"}
-              size={"icon"}
-              className="bg-orange-600 text-white hover:bg-orange-700"
-            >
-              <Check />
-            </Button>
+            <FinishOrderButton id={order.id} />
             <Button
               variant={"secondary"}
               size={"icon"}

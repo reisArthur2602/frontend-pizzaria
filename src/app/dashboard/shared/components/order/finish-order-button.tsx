@@ -10,28 +10,29 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { X } from "lucide-react";
+import { Check } from "lucide-react";
 
 import React from "react";
 import { toast } from "sonner";
 
-import { DeleteOrder } from "../../services/order/delete-order";
 import { Button } from "@/components/ui/button";
+import { FinishOrder } from "../../services/order/finish-order";
 
-interface IRemoveOrderButton {
+interface IFinishOrderButton {
   id: string;
 }
 
-const RemoveOrderButton = ({ id }: IRemoveOrderButton) => {
-  const handleDeleteOrder = async (id: string) => {
-    const response = await DeleteOrder({ id });
+const FinishOrderButton = ({ id }: IFinishOrderButton) => {
+  const handleFinishOrder = async (id: string) => {
+    const response = await FinishOrder({ id });
+
     if (response) {
       if (!response.sucess) {
         return toast.error(response.body);
       }
       toast.success(response.body);
     } else {
-      toast.error("Erro ao deletar pedido, tente novamente mais tarde");
+      toast.error("Erro ao finalizar pedido, tente novamente mais tarde");
     }
   };
 
@@ -43,7 +44,7 @@ const RemoveOrderButton = ({ id }: IRemoveOrderButton) => {
           size={"icon"}
           className="bg-orange-600 text-white hover:bg-orange-700"
         >
-          <X />
+          <Check />
         </Button>
       </AlertDialogTrigger>
 
@@ -51,14 +52,14 @@ const RemoveOrderButton = ({ id }: IRemoveOrderButton) => {
         <AlertDialogHeader>
           <AlertDialogTitle>Você tem certeza absoluta?</AlertDialogTitle>
           <AlertDialogDescription>
-            Esta ação não pode ser desfeita. Isso excluirá permanentemente o
-            pedido de nossos servidores.
+            Esta ação não pode ser desfeita. Isso irá atualizar permanentemente
+            o status do pedido em nossos servidores.
           </AlertDialogDescription>
         </AlertDialogHeader>
 
         <AlertDialogFooter>
           <AlertDialogCancel>Cancelar</AlertDialogCancel>
-          <AlertDialogAction onClick={() => handleDeleteOrder(id)}>
+          <AlertDialogAction onClick={() => handleFinishOrder(id)}>
             Continuar
           </AlertDialogAction>
         </AlertDialogFooter>
@@ -67,4 +68,4 @@ const RemoveOrderButton = ({ id }: IRemoveOrderButton) => {
   );
 };
 
-export default RemoveOrderButton;
+export default FinishOrderButton;
