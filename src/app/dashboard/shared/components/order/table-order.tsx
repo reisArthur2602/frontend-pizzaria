@@ -9,14 +9,16 @@ import {
 } from "@/components/ui/table";
 
 import { formatDate } from "../../utils/format-date";
-import { IGetOrderCompleted } from "../../services/order/get-order-completed";
+
 import { formatPrice } from "../../utils/format-price";
 import { calculateTotalItemsOrder } from "../../utils/calculate-total-items-order";
 import RemoveOrderTable from "./remove-order-table";
 import DialogViewOrder from "./dialog-view-order";
+import { IGetOrders } from "../../services/order/get-order-completed";
+import { Badge } from "@/components/ui/badge";
 
 interface ITableOrder {
-  orders: IGetOrderCompleted[] | [];
+  orders: IGetOrders[] | [];
 }
 
 const TableOrder = ({ orders }: ITableOrder) => {
@@ -28,6 +30,7 @@ const TableOrder = ({ orders }: ITableOrder) => {
         <TableRow>
           <TableHead>Id</TableHead>
           <TableHead>Mesa</TableHead>
+          <TableHead>Status</TableHead>
           <TableHead>Cadastro</TableHead>
           <TableHead>Total</TableHead>
           <TableHead>Ações</TableHead>
@@ -39,6 +42,13 @@ const TableOrder = ({ orders }: ITableOrder) => {
           <TableRow key={order.id}>
             <TableCell>{order.id}</TableCell>
             <TableCell>{order.table}</TableCell>
+            <TableCell>
+              {order.status ? (
+                <Badge>Finalizado</Badge>
+              ) : (
+                <Badge variant={"secondary"}>Em preparo</Badge>
+              )}
+            </TableCell>
             <TableCell>{formatDate(order.created_at)}</TableCell>
             <TableCell>
               {formatPrice(calculateTotalItemsOrder(order))}

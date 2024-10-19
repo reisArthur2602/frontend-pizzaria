@@ -27,6 +27,6 @@ export interface IGetOrderCurrent {
 }
 
 export const GetOrderCurrent = async () => {
-  const response = await api.get<IGetOrderCurrent[] | []>("/order/today");
+  const response = await api.get<IGetOrderCurrent[] | []>("/order/current");
   return response.data;
 };

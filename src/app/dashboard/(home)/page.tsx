@@ -2,10 +2,10 @@ import { Button } from "@/components/ui/button";
 import React from "react";
 
 import CardCurrentOrder from "../shared/components/order/card-current-order";
-import { GetOrderCompleted } from "../shared/services/order/get-order-completed";
+import { GetOrderCurrent } from "../shared/services/order/get-order-current";
 
 const Dashboard = async () => {
-  const currentOrders = await GetOrderCompleted();
+  const currentOrders = await GetOrderCurrent();
   return (
     <div>
       <section className="mb-9 flex justify-between">

@@ -2,7 +2,7 @@
 
 import { api } from "@/lib/axios-config";
 
-export interface IGetOrderCompleted {
+export interface IGetOrders {
   id: string;
   table: number;
   status: boolean;
@@ -26,7 +26,7 @@ export interface IGetOrderCompleted {
   }[];
 }
 
-export const GetOrderCompleted = async () => {
-  const response = await api.get<IGetOrderCompleted[] | []>("/order");
+export const GetOrders = async () => {
+  const response = await api.get<IGetOrders[] | []>("/order");
   return response.data;
 };

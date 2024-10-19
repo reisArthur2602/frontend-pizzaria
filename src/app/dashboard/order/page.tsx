@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
 import TableOrder from "../shared/components/order/table-order";
-import { GetOrderCompleted } from "../shared/services/order/get-order-completed";
+import { GetOrders } from "../shared/services/order/get-order-completed";
 
 const Order = async () => {
-  const orders = await GetOrderCompleted();
+  const orders = await GetOrders();
 
   return (
     <div>
