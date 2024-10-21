@@ -3,14 +3,32 @@
 import { Button } from "@/components/ui/button";
 import { Minus, Plus, ShoppingBag } from "lucide-react";
 import React, { useState } from "react";
+import { CreateItem } from "../../../services/item/create-item";
+import { toast } from "sonner";
 
 interface IAddItemOrder {
   product_id: string;
   order_id: string;
 }
 
-const AddItemOrder = ({}: IAddItemOrder) => {
+const AddItemOrder = ({ order_id, product_id }: IAddItemOrder) => {
   const [quantity, setQuantity] = useState(1);
+
+  const handleAddItem = async () => {
+    const response = await CreateItem({ order_id, product_id, quantity });
+
+    if (response) {
+      if (!response.sucess) {
+        return toast.error(response.body);
+      }
+
+      toast.success(response.body);
+    } else {
+      toast.error(
+        "Erro ao adicionar item ao pedido, tente novamente mais tarde",
+      );
+    }
+  };
 
   return (
     <div className="flex items-center justify-between py-4">
@@ -28,7 +46,7 @@ const AddItemOrder = ({}: IAddItemOrder) => {
         </Button>
       </div>
 
-      <Button className="flex items-center gap-4">
+      <Button className="flex items-center gap-4" onClick={handleAddItem}>
         <>Adicionar ao pedido</>
         <ShoppingBag />
       </Button>
