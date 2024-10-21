@@ -1,11 +1,12 @@
-import { Button } from "@/components/ui/button";
 import React from "react";
 
 import CardCurrentOrder from "../shared/components/order/card-current-order";
 import { GetOrderCurrent } from "../shared/services/order/get-order-current";
+import DialogCreateOrder from "../shared/components/order/dialog-create-order";
 
 const Dashboard = async () => {
   const currentOrders = await GetOrderCurrent();
+
   return (
     <div>
       <section className="mb-9 flex justify-between">
@@ -15,7 +16,7 @@ const Dashboard = async () => {
             Visualize todos os pedidos para a data atual
           </p>
         </div>
-        <Button variant={"ghost"}>Novo Pedido</Button>
+        <DialogCreateOrder />
       </section>
 
       <section className="grid grid-cols-5 gap-6">

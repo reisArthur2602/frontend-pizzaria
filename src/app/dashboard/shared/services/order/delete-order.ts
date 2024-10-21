@@ -12,7 +12,7 @@ export const DeleteOrder = async (credentials: IDeleteOrderRequest) => {
   try {
     await api.delete("/order", { params: credentials });
 
-    revalidatePath("/dashboard/order");
+    revalidatePath("/dashboard");
 
     return {
       sucess: true,
