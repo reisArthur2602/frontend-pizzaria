@@ -1,7 +1,6 @@
 "use server";
 
 import { api } from "@/lib/axios-config";
-import { AxiosError } from "axios";
 
 export interface IGetOrderByIdRequest {
   id: string;
@@ -33,21 +32,9 @@ export interface IGetOrderByIdResponse {
     | [];
 }
 export const GetOrderById = async (credentials: IGetOrderByIdRequest) => {
-  try {
-    const response = await api.get<IGetOrderByIdResponse>("/order/show", {
-      params: credentials,
-    });
+  const response = await api.get<IGetOrderByIdResponse>("/order/show", {
+    params: credentials,
+  });
 
-    return {
-      sucess: true,
-      body: response.data,
-    };
-  } catch (error) {
-    if (error instanceof AxiosError) {
-      return {
-        sucess: false,
-        body: error.response?.data.message as string,
-      };
-    }
-  }
+  return response.data;
 };

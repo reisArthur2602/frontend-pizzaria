@@ -12,12 +12,13 @@ import React from "react";
 import { formatDate } from "../../utils/format-date";
 import { formatPrice } from "../../utils/format-price";
 import { Badge } from "@/components/ui/badge";
-import { IGetOrderCompleted } from "../../services/order/get-order-completed";
+
 import { calculateTotalItemsOrder } from "../../utils/calculate-total-items-order";
 import CardItem from "../card-item";
+import { IGetOrders } from "../../services/order/get-order-completed";
 
 interface IDialogViewOrder {
-  order: IGetOrderCompleted;
+  order: IGetOrders;
 }
 
 const DialogViewOrder = ({ order }: IDialogViewOrder) => {
