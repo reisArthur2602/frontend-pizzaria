@@ -4,15 +4,22 @@ import { GetCategory } from "../../shared/services/category/get-category";
 import SearchProduct from "../../shared/components/order/create/search-product";
 
 import ProductsList from "../../shared/components/order/create/products-list";
-import { cookies } from "next/headers";
+
 import DetailsOrder from "../../shared/components/order/create/details-order";
 import { GetOrderById } from "../../shared/services/order/get-order-by-id";
+import { redirect } from "next/navigation";
 
-const Create = async () => {
+interface ICreateOrder {
+  params: { id: string };
+}
+
+const CreateOrder = async ({ params }: ICreateOrder) => {
   const categories = await GetCategory();
 
   const order = await GetOrderById({
-    id: cookies().get("order-in-draft")?.value as string,
+    id: params.id,
+  }).catch(() => {
+    return redirect("/dashboard");
   });
 
   return (
@@ -37,4 +44,4 @@ const Create = async () => {
   );
 };
 
-export default Create;
+export default CreateOrder;

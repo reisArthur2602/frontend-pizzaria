@@ -14,7 +14,7 @@ export const CreateItem = async (credentials: ICreateItemRequest) => {
   try {
     await api.post("/order/item", credentials);
 
-    revalidatePath("/dashboard/create");
+    revalidatePath("/dashboard/order");
 
     return {
       sucess: true,

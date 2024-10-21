@@ -12,7 +12,7 @@ export const FinishOrder = async (credentials: IFinishOrderRequest) => {
   try {
     await api.patch(`/order/finish?id=${credentials.id}`);
 
-    revalidatePath("/dashboard/order");
+    revalidatePath("/dashboard");
 
     return {
       sucess: true,

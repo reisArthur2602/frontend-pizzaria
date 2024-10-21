@@ -58,7 +58,7 @@ const CardCurrentOrder = ({ order }: ICardCurrentOrder) => {
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="flex h-full max-h-80 w-full flex-col overflow-y-scroll">
+      <CardContent className="flex h-80 w-full flex-col overflow-y-auto">
         {order.Item.map((item) => (
           <CardItem
             key={item.id}

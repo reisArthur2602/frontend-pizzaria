@@ -2,6 +2,7 @@
 
 import { api } from "@/lib/axios-config";
 import { AxiosError } from "axios";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
 export interface ICreateOrderRequest {
@@ -25,11 +26,13 @@ export const CreateOrder = async (credentials: ICreateOrderRequest) => {
       path: "/",
       secure: false,
     };
+
+    revalidatePath("/dashboard");
     cookies().set("order-in-draft", id, configCookie);
 
     return {
       sucess: true,
-      body: `O pedido na mesa ${credentials.table} foi aberto com sucesso!`,
+      body: id,
     };
   } catch (error) {
     if (error instanceof AxiosError) {

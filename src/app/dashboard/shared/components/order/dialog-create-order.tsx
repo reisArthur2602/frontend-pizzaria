@@ -23,21 +23,23 @@ import {
   ICreateOrderRequest,
 } from "../../services/order/create-order";
 import { registerOrderSchema } from "../../lib/zod/register-order-schema";
+import { useRouter } from "next/navigation";
 
 const DialogCreateOrder = () => {
   const form = useForm<ICreateOrderRequest>({
     resolver: zodResolver(registerOrderSchema),
   });
 
-  const handleRegister = form.handleSubmit(async (credentials) => {
+  const router = useRouter();
+
+  const handleCreateOrder = form.handleSubmit(async (credentials) => {
     const response = await CreateOrder(credentials);
 
     if (response) {
       if (!response.sucess) {
         return toast.error(response.body);
       }
-      form.reset();
-      toast.success(response.body);
+      router.replace(`/dashboard/order/${response.body}`);
     } else {
       toast.error("Erro ao abrir pedido, tente novamente mais tarde");
     }
@@ -57,7 +59,7 @@ const DialogCreateOrder = () => {
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleRegister}>
+        <form onSubmit={handleCreateOrder}>
           <div className="mb-4 flex items-center gap-3 text-right">
             <Label htmlFor="name">Mesa</Label>
             <Input
