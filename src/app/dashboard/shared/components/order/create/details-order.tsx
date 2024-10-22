@@ -9,10 +9,11 @@ import {
 } from "@/components/ui/sheet";
 import { ShoppingBag } from "lucide-react";
 import { IGetOrderByIdResponse } from "../../../services/order/get-order-by-id";
-import CardItem from "../../card-item";
+
 import { formatPrice } from "../../../utils/format-price";
 import { calculateTotalItemsOrder } from "../../../utils/calculate-total-items-order";
 import SendOrderButton from "./send-order-button";
+import DetailProductItem from "./detail-product-item";
 
 interface IDetailsOrder {
   order: IGetOrderByIdResponse;
@@ -46,12 +47,9 @@ const DetailsOrder = ({ order }: IDetailsOrder) => {
         <aside className="flex flex-1 flex-col justify-between gap-4">
           <div className="flex h-[27.5rem] w-full flex-col overflow-y-auto">
             {order.Item.map((item) => (
-              <CardItem
+              <DetailProductItem
                 key={item.id}
-                image_url={item.product.image_url}
-                price={item.product.price}
-                quantity={item.quantity}
-                product_name={item.product.name}
+                product={{ ...item.product, quantity: item.quantity }}
               />
             ))}
           </div>
