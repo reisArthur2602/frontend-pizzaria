@@ -49,7 +49,11 @@ const DetailsOrder = ({ order }: IDetailsOrder) => {
             {order.Item.map((item) => (
               <DetailProductItem
                 key={item.id}
-                product={{ ...item.product, quantity: item.quantity }}
+                product={{
+                  ...item.product,
+                  quantity: item.quantity,
+                  item_id: item.id,
+                }}
               />
             ))}
           </div>

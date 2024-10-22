@@ -1,13 +1,17 @@
+"use client";
+
 import React from "react";
 import { formatPrice } from "../../../utils/format-price";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
+import { DeleteItem } from "../../../services/item/delete-item";
+import { toast } from "sonner";
 
 interface IDetailProductItem {
   product: {
-    id: string;
+    item_id: string;
     image_url: string;
     name: string;
     quantity: number;
@@ -16,6 +20,18 @@ interface IDetailProductItem {
 }
 
 const DetailProductItem = ({ product }: IDetailProductItem) => {
+  const handleDeleteItem = async (id: string) => {
+    const response = await DeleteItem({ id });
+    if (response) {
+      if (!response.sucess) {
+        return toast.error(response.body);
+      }
+      toast.success(response.body);
+    } else {
+      toast.error("Erro ao deletar item, tente novamente mais tarde");
+    }
+  };
+
   return (
     <div className="flex items-center justify-between gap-2 border-b py-4">
       <div className="flex items-center gap-4 text-sm">
@@ -35,7 +51,11 @@ const DetailProductItem = ({ product }: IDetailProductItem) => {
         </div>
       </div>
 
-      <Button variant={"destructive"} size={"icon"}>
+      <Button
+        variant={"destructive"}
+        size={"icon"}
+        onClick={() => handleDeleteItem(product.item_id)}
+      >
         <Trash size={20} />
       </Button>
     </div>
