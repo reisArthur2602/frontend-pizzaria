@@ -14,6 +14,7 @@ import { formatPrice } from "../../../utils/format-price";
 import { calculateTotalItemsOrder } from "../../../utils/calculate-total-items-order";
 import SendOrderButton from "./send-order-button";
 import DetailProductItem from "./detail-product-item";
+import DeleteOrderInDraftButtonButton from "./delete-order-in-draft-button";
 
 interface IDetailsOrder {
   order: IGetOrderByIdResponse;
@@ -73,7 +74,10 @@ const DetailsOrder = ({ order }: IDetailsOrder) => {
             </div>
           </div>
 
-          <SendOrderButton id={order.id} />
+          <div className="flex flex-col gap-5">
+            <SendOrderButton id={order.id} />
+            <DeleteOrderInDraftButtonButton id={order.id} />
+          </div>
         </aside>
       </SheetContent>
     </Sheet>

@@ -3,6 +3,7 @@
 import { api } from "@/lib/axios-config";
 import { AxiosError } from "axios";
 import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
 
 export interface IDeleteOrderRequest {
   id: string;
@@ -11,6 +12,8 @@ export interface IDeleteOrderRequest {
 export const DeleteOrder = async (credentials: IDeleteOrderRequest) => {
   try {
     await api.delete("/order", { params: credentials });
+
+    cookies().delete("order-in-draft");
 
     revalidatePath("/dashboard");
 
