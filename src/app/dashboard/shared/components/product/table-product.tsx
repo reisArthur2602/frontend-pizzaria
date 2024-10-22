@@ -42,12 +42,14 @@ const TableProduct = ({ products }: ITableProduct) => {
           <TableRow key={product.id}>
             <TableCell className="capitalize">{product.id}</TableCell>
             <TableCell>
-              <Image
-                src={`${process.env.NEXT_PUBLIC_API_URL}/files/${product.image_url}`}
-                width={120}
-                height={80}
-                alt={product.name}
-              />
+              <div className="relative h-20 w-32">
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_API_URL}/files/${product.image_url}`}
+                  fill
+                  alt={product.name}
+                  className="object-cover"
+                />
+              </div>
             </TableCell>
             <TableCell className="capitalize">{product.name}</TableCell>
             <TableCell>{formatPrice(product.price)}</TableCell>
