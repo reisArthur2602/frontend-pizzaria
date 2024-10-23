@@ -30,17 +30,19 @@ import { toast } from "sonner";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { registerProductSchema } from "../../lib/zod/register-product-schema";
-import { CreateProduct } from "../../services/product/create-product";
+
 import { CategoryResponse } from "@/types/Category";
+import { registerProductSchema } from "@/lib/zod/Product";
+import { CreateProduct } from "@/services/product/create-product";
 
-interface IDialogCreateProduct {
+type Props = {
   categories: CategoryResponse[] | [];
-}
+};
 
-const DialogCreateProduct = ({ categories }: IDialogCreateProduct) => {
+const CreateProductButton = ({ categories }: Props) => {
   const [category_id, setCategoryId] = useState("");
   const [image, setImage] = useState<File>();
+
   const form = useForm({ resolver: zodResolver(registerProductSchema) });
 
   const handleRegisterProduct = form.handleSubmit(async (credentials) => {
@@ -48,7 +50,9 @@ const DialogCreateProduct = ({ categories }: IDialogCreateProduct) => {
       toast.error("A imagem do produto é obrigatória");
       return;
     }
+
     const formData = new FormData();
+
     formData.append("name", credentials.name);
     formData.append("price", credentials.price);
     formData.append("description", credentials.description);
@@ -57,16 +61,12 @@ const DialogCreateProduct = ({ categories }: IDialogCreateProduct) => {
 
     const response = await CreateProduct(formData);
 
-    if (response) {
-      if (!response.sucess) {
-        toast.error(response.body);
-      } else {
-        form.reset();
-        toast.success(response.body);
-      }
-    } else {
-      toast.error("Erro ao cadastrar categoria, tente novamente mais tarde");
+    if (!response?.sucess) {
+      return toast.error(response?.body);
     }
+
+    form.reset();
+    toast.success(response.body);
   });
 
   const handleFile = (e: ChangeEvent<HTMLInputElement>) => {
@@ -164,4 +164,4 @@ const DialogCreateProduct = ({ categories }: IDialogCreateProduct) => {
   );
 };
 
-export default DialogCreateProduct;
+export default CreateProductButton;

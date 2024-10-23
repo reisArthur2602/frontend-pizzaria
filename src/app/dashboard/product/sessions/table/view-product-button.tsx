@@ -8,17 +8,19 @@ import {
 import { DialogTrigger } from "@radix-ui/react-dialog";
 import { File } from "lucide-react";
 import React from "react";
-import { IGetProductResponse } from "../../services/product/get-product";
+
 import Image from "next/image";
-import { formatDate } from "../../utils/format-date";
-import { formatPrice } from "../../utils/format-price";
+
 import { Badge } from "@/components/ui/badge";
+import { ProductResponse } from "@/types/Product";
+import { formatPrice } from "@/app/dashboard/shared/utils/format-price";
+import { format } from "date-fns";
 
-interface IViewProductTable {
-  product: IGetProductResponse;
-}
+type Props = {
+  product: ProductResponse;
+};
 
-const DialogViewProduct = ({ product }: IViewProductTable) => {
+const ViewProductButton = ({ product }: Props) => {
   return (
     <Dialog>
       <DialogTrigger>
@@ -64,7 +66,9 @@ const DialogViewProduct = ({ product }: IViewProductTable) => {
 
           <div className="flex items-center justify-between border-b py-4">
             <b>Cadastro:</b>
-            <p className="text-zinc-500">{formatDate(product.created_at)}</p>
+            <p className="text-zinc-500">
+              {format(product.created_at, "dd/MM/yyyy")}
+            </p>
           </div>
 
           <div className="flex flex-col gap-2 py-4">
@@ -77,4 +81,4 @@ const DialogViewProduct = ({ product }: IViewProductTable) => {
   );
 };
 
-export default DialogViewProduct;
+export default ViewProductButton;

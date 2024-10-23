@@ -1,3 +1,5 @@
+import { formatPrice } from "@/app/dashboard/shared/utils/format-price";
+import { Badge } from "@/components/ui/badge";
 import {
   Table,
   TableBody,
@@ -7,20 +9,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-import { formatDate } from "../../utils/format-date";
-import { IGetProductResponse } from "../../services/product/get-product";
-import { formatPrice } from "../../utils/format-price";
-import { Badge } from "@/components/ui/badge";
-import RemoveProductTable from "./remove-product-table";
+import { ProductResponse } from "@/types/Product";
+import { format } from "date-fns";
 import Image from "next/image";
-import DialogViewProduct from "./dialog-view-product";
+import DeleteProductButton from "./delete-product-button";
+import ViewProductButton from "./view-product-button";
 
-interface ITableProduct {
-  products: IGetProductResponse[] | [];
-}
+type Props = {
+  products: ProductResponse[] | [];
+};
 
-const TableProduct = ({ products }: ITableProduct) => {
+const TableProduct = ({ products }: Props) => {
   return (
     <Table>
       <TableCaption>Produtos cadastrados no sistema</TableCaption>
@@ -56,11 +55,11 @@ const TableProduct = ({ products }: ITableProduct) => {
             <TableCell className="capitalize">
               <Badge>{product.category.name}</Badge>
             </TableCell>
-            <TableCell>{formatDate(product.created_at)}</TableCell>
+            <TableCell>{format(product.created_at, "dd/MM/yyyy")}</TableCell>
             <TableCell>
               <div className="flex items-center gap-3">
-                <RemoveProductTable id={product.id} />
-                <DialogViewProduct product={product} />
+                <DeleteProductButton id={product.id} />
+                <ViewProductButton product={product} />
               </div>
             </TableCell>
           </TableRow>

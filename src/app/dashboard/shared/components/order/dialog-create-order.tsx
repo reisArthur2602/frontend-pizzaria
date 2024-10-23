@@ -22,8 +22,9 @@ import {
   CreateOrder,
   ICreateOrderRequest,
 } from "../../services/order/create-order";
-import { registerOrderSchema } from "../../lib/zod/register-order-schema";
+
 import { useRouter } from "next/navigation";
+import { registerOrderSchema } from "@/lib/zod/Order";
 
 const DialogCreateOrder = () => {
   const form = useForm<ICreateOrderRequest>({

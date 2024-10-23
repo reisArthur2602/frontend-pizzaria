@@ -4,19 +4,15 @@ import { api } from "@/lib/axios-config";
 import { AxiosError } from "axios";
 import { revalidatePath } from "next/cache";
 
-export interface IDeleteProductRequest {
-  id: string;
-}
-
-export const DeleteProduct = async (credentials: IDeleteProductRequest) => {
+export const DeleteProduct = async (id: string) => {
   try {
-    await api.delete("/product", { params: credentials });
+    await api.delete("/product", { params: { id } });
 
     revalidatePath("/dashboard/product");
 
     return {
       sucess: true,
-      body: "O Produto foi removido com sucesso",
+      body: "O Produto Foi Removido Com Sucesso",
     };
   } catch (error) {
     if (error instanceof AxiosError) {

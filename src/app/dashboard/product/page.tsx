@@ -1,9 +1,9 @@
 import React from "react";
-import DialogCreateProduct from "../shared/components/product/dialog-create-product";
 
-import { GetProduct } from "../shared/services/product/get-product";
-import TableProduct from "../shared/components/product/table-product";
+import CreateProductButton from "./sessions/create-product-button";
+import TableProduct from "./sessions/table/table-products";
 import { GetCategory } from "@/services/category/get-category";
+import { GetProduct } from "@/services/product/get-product";
 
 const Product = async () => {
   const categories = await GetCategory();
@@ -16,7 +16,7 @@ const Product = async () => {
           <h1 className="text-xl font-bold">Produtos</h1>
           <p className="text-sm text-zinc-400">Gerencie seus produtos</p>
         </div>
-        <DialogCreateProduct categories={categories} />
+        <CreateProductButton categories={categories} />
       </section>
       <TableProduct products={products} />
     </div>

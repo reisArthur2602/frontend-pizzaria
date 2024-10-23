@@ -10,27 +10,25 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { DeleteProduct } from "@/services/product/delete-product";
 import { Trash2 } from "lucide-react";
 
 import React from "react";
 import { toast } from "sonner";
-import { DeleteProduct } from "../../services/product/delete-product";
 
-interface IRemoveProductTable {
+type Props = {
   id: string;
-}
+};
 
-const RemoveProductTable = ({ id }: IRemoveProductTable) => {
+const DeleteProductButton = ({ id }: Props) => {
   const handleDeleteProduct = async (id: string) => {
-    const response = await DeleteProduct({ id });
-    if (response) {
-      if (!response.sucess) {
-        return toast.error(response.body);
-      }
-      toast.success(response.body);
-    } else {
-      toast.error("Erro ao deletar categoria, tente novamente mais tarde");
+    const response = await DeleteProduct(id);
+
+    if (!response?.sucess) {
+      return toast.error(response?.body);
     }
+
+    toast.success(response.body);
   };
 
   return (
@@ -41,7 +39,7 @@ const RemoveProductTable = ({ id }: IRemoveProductTable) => {
 
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Você tem certeza absoluta?</AlertDialogTitle>
+          <AlertDialogTitle>Deseja excluir o produto?</AlertDialogTitle>
           <AlertDialogDescription>
             Esta ação não pode ser desfeita. Isso excluirá permanentemente o
             produto de nossos servidores.
@@ -59,4 +57,4 @@ const RemoveProductTable = ({ id }: IRemoveProductTable) => {
   );
 };
 
-export default RemoveProductTable;
+export default DeleteProductButton;
