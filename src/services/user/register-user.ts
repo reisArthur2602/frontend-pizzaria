@@ -1,14 +1,10 @@
 "use server";
 
 import { api } from "@/lib/axios-config";
+import { UserRequest } from "@/types/User";
 import { AxiosError } from "axios";
 
-export interface IRegisterUserRequest {
-  email: string;
-  password: string;
-}
-
-export const RegisterUser = async (credentials: IRegisterUserRequest) => {
+export const RegisterUser = async (credentials: UserRequest) => {
   try {
     await api.post("/user/register", credentials);
     return {

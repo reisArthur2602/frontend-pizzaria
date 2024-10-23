@@ -1,4 +1,4 @@
-import FormLogin from "../shared/components/form-login";
+import FormLogin from "./sessions/form-login";
 
 const Login = () => {
   return <FormLogin />;

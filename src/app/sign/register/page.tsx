@@ -1,5 +1,4 @@
-import React from "react";
-import FormRegister from "../shared/components/form-register";
+import FormRegister from "./sessions/form-register";
 
 const Register = () => {
   return <FormRegister />;

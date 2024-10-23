@@ -1,18 +1,20 @@
 "use client";
-import Logo from "@/components/logo";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
-import React from "react";
 import { useForm } from "react-hook-form";
-import { registerUserSchema } from "../lib/zod/register-user-schema";
-import { IRegisterUserRequest, RegisterUser } from "../services/register-user";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { UserRequest } from "@/types/User";
+
+import Logo from "@/components/logo";
+import Link from "next/link";
+import { RegisterUser } from "@/services/user/register-user";
+import { registerUserSchema } from "@/lib/zod/User";
 
 const FormRegister = () => {
-  const form = useForm<IRegisterUserRequest>({
+  const form = useForm<UserRequest>({
     resolver: zodResolver(registerUserSchema),
   });
 

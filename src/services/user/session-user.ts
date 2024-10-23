@@ -1,23 +1,14 @@
 "use server";
 
 import { api } from "@/lib/axios-config";
+import { UserAuthenticatedResponse, UserRequest } from "@/types/User";
 import { AxiosError } from "axios";
 import { cookies } from "next/headers";
 
-export interface ISessionUserRequest {
-  email: string;
-  password: string;
-}
-
-export interface ISessionUserResponse {
-  user: { email: string; password: string };
-  token: string;
-}
-
-export const SessionUser = async (credentials: ISessionUserRequest) => {
+export const SessionUser = async (credentials: UserRequest) => {
   try {
     const { token } = (
-      await api.post<ISessionUserResponse>("/user/session", credentials)
+      await api.post<UserAuthenticatedResponse>("/user/session", credentials)
     ).data;
 
     const week = 24 * 60 * 60 * 1000 * 7;

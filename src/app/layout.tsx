@@ -4,7 +4,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
-  title: "Painel Administrativo",
+  title: "Painel Admin",
 };
 
 const inter = Inter({ subsets: ["latin"] });
