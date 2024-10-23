@@ -1,14 +1,11 @@
 "use server";
 
 import { api } from "@/lib/axios-config";
+import { CategoryRequest } from "@/types/Category";
 import { AxiosError } from "axios";
 import { revalidatePath } from "next/cache";
 
-export interface ICreateCategoryRequest {
-  name: string;
-}
-
-export const CreateCategory = async (credentials: ICreateCategoryRequest) => {
+export const CreateCategory = async (credentials: CategoryRequest) => {
   try {
     await api.post("/category", credentials);
 
@@ -16,7 +13,7 @@ export const CreateCategory = async (credentials: ICreateCategoryRequest) => {
 
     return {
       sucess: true,
-      body: `A categoria ${credentials.name} foi cadastrada com sucesso!`,
+      body: `A Categoria ${credentials.name} Foi Cadastrada com Sucesso!`,
     };
   } catch (error) {
     if (error instanceof AxiosError) {

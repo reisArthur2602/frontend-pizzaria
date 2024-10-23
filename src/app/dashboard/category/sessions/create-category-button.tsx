@@ -15,31 +15,28 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useForm } from "react-hook-form";
-import {
-  CreateCategory,
-  ICreateCategoryRequest,
-} from "../../services/category/create-category";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { registerCategorySchema } from "../../lib/zod/register-category-schema";
-import { toast } from "sonner";
 
-const DialogCreateCategory = () => {
-  const form = useForm<ICreateCategoryRequest>({
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import { toast } from "sonner";
+import { CategoryRequest } from "@/types/Category";
+
+import { registerCategorySchema } from "@/lib/zod/Category";
+import { CreateCategory } from "@/services/category/create-category";
+
+const CreateCategoryButton = () => {
+  const form = useForm<CategoryRequest>({
     resolver: zodResolver(registerCategorySchema),
   });
 
-  const handleRegister = form.handleSubmit(async (credentials) => {
+  const handleCreateCategory = form.handleSubmit(async (credentials) => {
     const response = await CreateCategory(credentials);
 
-    if (response) {
-      if (!response.sucess) {
-        return toast.error(response.body);
-      }
-      form.reset();
-      toast.success(response.body);
-    } else {
-      toast.error("Erro ao cadastrar categoria, tente novamente mais tarde");
+    if (!response?.sucess) {
+      return toast.error(response?.body);
     }
+    form.reset();
+    toast.success(response.body);
   });
 
   return (
@@ -56,7 +53,7 @@ const DialogCreateCategory = () => {
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleRegister}>
+        <form onSubmit={handleCreateCategory}>
           <div className="mb-4 flex items-center gap-3 text-right">
             <Label htmlFor="name">Nome</Label>
             <Input
@@ -81,4 +78,4 @@ const DialogCreateCategory = () => {
   );
 };
 
-export default DialogCreateCategory;
+export default CreateCategoryButton;

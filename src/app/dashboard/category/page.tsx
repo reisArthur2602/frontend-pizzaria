@@ -1,9 +1,8 @@
-import React from "react";
-import DialogCreateCategory from "../shared/components/category/dialog-create-category";
-import TableCategory from "../shared/components/category/table-category";
-import { GetCategory } from "../shared/services/category/get-category";
+import { GetCategory } from "@/services/category/get-category";
+import CreateCategoryButton from "./sessions/create-category-button";
+import TableCategory from "./sessions/table/table-category";
 
-const Category = async () => {
+const CategoryPage = async () => {
   const categories = await GetCategory();
 
   return (
@@ -13,7 +12,7 @@ const Category = async () => {
           <h1 className="text-xl font-bold">Categorias</h1>
           <p className="text-sm text-zinc-400">Gerencie suas categorias</p>
         </div>
-        <DialogCreateCategory />
+        <CreateCategoryButton />
       </section>
 
       <TableCategory categories={categories} />
@@ -21,4 +20,4 @@ const Category = async () => {
   );
 };
 
-export default Category;
+export default CategoryPage;

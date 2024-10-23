@@ -23,7 +23,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { IGetCategoryResponse } from "../../services/category/get-category";
+
 import { ChangeEvent, useState } from "react";
 
 import { toast } from "sonner";
@@ -32,9 +32,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerProductSchema } from "../../lib/zod/register-product-schema";
 import { CreateProduct } from "../../services/product/create-product";
+import { CategoryResponse } from "@/types/Category";
 
 interface IDialogCreateProduct {
-  categories: IGetCategoryResponse[] | [];
+  categories: CategoryResponse[] | [];
 }
 
 const DialogCreateProduct = ({ categories }: IDialogCreateProduct) => {

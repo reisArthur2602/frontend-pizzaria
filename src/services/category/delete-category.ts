@@ -4,13 +4,9 @@ import { api } from "@/lib/axios-config";
 import { AxiosError } from "axios";
 import { revalidatePath } from "next/cache";
 
-export interface IDeleteCategoryRequest {
-  id: string;
-}
-
-export const DeleteCategory = async (credentials: IDeleteCategoryRequest) => {
+export const DeleteCategory = async (id: string) => {
   try {
-    await api.delete("/category", { params: credentials });
+    await api.delete("/category", { params: { id } });
 
     revalidatePath("/dashboard/category");
 

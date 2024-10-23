@@ -7,17 +7,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { CategoryResponse } from "@/types/Category";
+import { format } from "date-fns";
+import DeleteCategoryButton from "./delete-category-button";
 
-import { IGetCategoryResponse } from "../../services/category/get-category";
+type Props = {
+  categories: CategoryResponse[] | [];
+};
 
-import { formatDate } from "../../utils/format-date";
-import RemoveCategoryTable from "./remove-category-table";
-
-interface ITableCategory {
-  categories: IGetCategoryResponse[] | [];
-}
-
-const TableCategory = ({ categories }: ITableCategory) => {
+const TableCategory = ({ categories }: Props) => {
   return (
     <Table>
       <TableCaption>Categorias cadastradas no sistema</TableCaption>
@@ -36,9 +34,9 @@ const TableCategory = ({ categories }: ITableCategory) => {
           <TableRow key={category.id}>
             <TableCell>{category.id}</TableCell>
             <TableCell>{category.name}</TableCell>
-            <TableCell>{formatDate(category.created_at)}</TableCell>
+            <TableCell>{format(category.created_at, "dd/MM/yyyy")}</TableCell>
             <TableCell>
-              <RemoveCategoryTable id={category.id} />
+              <DeleteCategoryButton id={category.id} />
             </TableCell>
           </TableRow>
         ))}

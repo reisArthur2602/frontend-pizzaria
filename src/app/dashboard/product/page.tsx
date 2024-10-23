@@ -1,8 +1,9 @@
 import React from "react";
 import DialogCreateProduct from "../shared/components/product/dialog-create-product";
-import { GetCategory } from "../shared/services/category/get-category";
+
 import { GetProduct } from "../shared/services/product/get-product";
 import TableProduct from "../shared/components/product/table-product";
+import { GetCategory } from "@/services/category/get-category";
 
 const Product = async () => {
   const categories = await GetCategory();

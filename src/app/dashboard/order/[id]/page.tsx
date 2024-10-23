@@ -1,6 +1,5 @@
 import React from "react";
 
-import { GetCategory } from "../../shared/services/category/get-category";
 import SearchProduct from "../../shared/components/order/create/search-product";
 
 import ProductsList from "../../shared/components/order/create/products-list";
@@ -8,6 +7,7 @@ import ProductsList from "../../shared/components/order/create/products-list";
 import DetailsOrder from "../../shared/components/order/create/details-order";
 import { GetOrderById } from "../../shared/services/order/get-order-by-id";
 import { redirect } from "next/navigation";
+import { GetCategory } from "@/services/category/get-category";
 
 interface ICreateOrder {
   params: { id: string };
