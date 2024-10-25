@@ -5,7 +5,7 @@ import TableProduct from "./sessions/table/table-products";
 import { GetCategory } from "@/services/category/get-category";
 import { GetProduct } from "@/services/product/get-product";
 
-const Product = async () => {
+const ProductPage = async () => {
   const categories = await GetCategory();
   const products = await GetProduct();
 
@@ -23,4 +23,4 @@ const Product = async () => {
   );
 };
 
-export default Product;
+export default ProductPage;

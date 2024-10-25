@@ -1,11 +1,10 @@
-import React from "react";
+import CreateOrderButton from "../order/(order)/sessions/create-order-button";
 
-import CardCurrentOrder from "../shared/components/order/card-current-order";
-import { GetOrderCurrent } from "../shared/services/order/get-order-current";
-import DialogCreateOrder from "../shared/components/order/dialog-create-order";
+import CardOrder from "../order/(order)/sessions/card/card-order";
+import { GetOrderInProductionCurrent } from "@/services/order/get-order-in-production-current";
 
-const Dashboard = async () => {
-  const currentOrders = await GetOrderCurrent();
+const DashboardPage = async () => {
+  const currentOrders = await GetOrderInProductionCurrent();
 
   return (
     <div>
@@ -16,16 +15,16 @@ const Dashboard = async () => {
             Visualize todos os pedidos para a data atual
           </p>
         </div>
-        <DialogCreateOrder />
+        <CreateOrderButton />
       </section>
 
       <section className="grid grid-cols-5 gap-6">
         {currentOrders.map((order) => (
-          <CardCurrentOrder order={order} key={order.id} />
+          <CardOrder order={order} key={order.id} />
         ))}
       </section>
     </div>
   );
 };
 
-export default Dashboard;
+export default DashboardPage;

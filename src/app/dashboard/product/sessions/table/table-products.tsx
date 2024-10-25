@@ -1,4 +1,4 @@
-import { formatPrice } from "@/app/dashboard/shared/utils/format-price";
+import { formatPrice } from "@/utils/format-price";
 import { Badge } from "@/components/ui/badge";
 import {
   Table,

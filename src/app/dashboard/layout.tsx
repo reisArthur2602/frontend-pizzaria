@@ -1,11 +1,11 @@
+import HeaderDashboard from "@/components/header/header-dashboard";
 import React, { ReactNode } from "react";
-import HeaderDashboard from "./shared/components/header-dashboard";
 
-interface IDashboardLayout {
+type Props = {
   children: ReactNode;
-}
+};
 
-const DashboardLayout = ({ children }: IDashboardLayout) => {
+const DashboardLayout = ({ children }: Props) => {
   return (
     <div className="flex h-full flex-col">
       <HeaderDashboard />

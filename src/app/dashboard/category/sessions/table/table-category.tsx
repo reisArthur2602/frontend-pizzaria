@@ -33,7 +33,7 @@ const TableCategory = ({ categories }: Props) => {
         {categories.map((category) => (
           <TableRow key={category.id}>
             <TableCell>{category.id}</TableCell>
-            <TableCell>{category.name}</TableCell>
+            <TableCell className="capitalize">{category.name}</TableCell>
             <TableCell>{format(category.created_at, "dd/MM/yyyy")}</TableCell>
             <TableCell>
               <DeleteCategoryButton id={category.id} />
