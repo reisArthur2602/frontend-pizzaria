@@ -13,6 +13,7 @@ type Props = {
 
 const DraftPage = async ({ params }: Props) => {
   const categories = await GetCategory();
+
   const id = params.id;
 
   const order = await GetOrderById(id).catch(() => {

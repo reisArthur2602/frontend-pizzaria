@@ -1,7 +1,7 @@
-import CreateOrderButton from "../order/(order)/sessions/create-order-button";
+import CardOrder from "./sessions/card/card-order";
 
-import CardOrder from "../order/(order)/sessions/card/card-order";
 import { GetOrderInProductionCurrent } from "@/services/order/get-order-in-production-current";
+import OrderSwitch from "./sessions/order-switch/order-switch";
 
 const DashboardPage = async () => {
   const currentOrders = await GetOrderInProductionCurrent();
@@ -15,7 +15,7 @@ const DashboardPage = async () => {
             Visualize todos os pedidos para a data atual
           </p>
         </div>
-        <CreateOrderButton />
+        <OrderSwitch />
       </section>
 
       <section className="grid grid-cols-5 gap-6">
