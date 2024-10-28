@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 
-import { OrderRecents } from "./order-recents";
 import { LINKS_HEADER_DASHBOARD } from "@/contants/links";
 
 const HeaderDashboard = () => {
@@ -19,8 +18,6 @@ const HeaderDashboard = () => {
               {link.label}
             </Link>
           ))}
-
-          <OrderRecents count={1} />
         </div>
       </nav>
     </header>
