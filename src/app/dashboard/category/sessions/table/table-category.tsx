@@ -10,6 +10,7 @@ import {
 import { CategoryResponse } from "@/types/Category";
 import { format } from "date-fns";
 import DeleteCategoryButton from "./delete-category-button";
+import ViewCategoryButton from "./view-category-button";
 
 type Props = {
   categories: CategoryResponse[] | [];
@@ -36,7 +37,10 @@ const TableCategory = ({ categories }: Props) => {
             <TableCell className="capitalize">{category.name}</TableCell>
             <TableCell>{format(category.created_at, "dd/MM/yyyy")}</TableCell>
             <TableCell>
-              <DeleteCategoryButton id={category.id} />
+              <div className="flex items-center gap-3">
+                <DeleteCategoryButton id={category.id} />
+                <ViewCategoryButton category={category} />
+              </div>
             </TableCell>
           </TableRow>
         ))}

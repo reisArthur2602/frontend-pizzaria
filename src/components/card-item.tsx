@@ -5,7 +5,7 @@ import { formatPrice } from "../utils/format-price";
 interface ICardItem {
   image_url: string;
   product_name: string;
-  quantity: number;
+  quantity?: number;
   price: number;
 }
 
@@ -26,7 +26,7 @@ const CardItem = ({ image_url, price, product_name, quantity }: ICardItem) => {
         </div>
       </div>
 
-      <Badge>{quantity}x</Badge>
+      {quantity && <Badge>{quantity}x</Badge>}
     </div>
   );
 };
