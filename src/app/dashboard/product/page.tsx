@@ -10,7 +10,7 @@ const ProductPage = async () => {
   const products = await GetProduct();
 
   return (
-    <div>
+    <>
       <section className="mb-9 flex justify-between">
         <div>
           <h1 className="text-xl font-bold">Produtos</h1>
@@ -19,7 +19,7 @@ const ProductPage = async () => {
         <CreateProductButton categories={categories} />
       </section>
       <TableProduct products={products} />
-    </div>
+    </>
   );
 };
 

@@ -1,4 +1,4 @@
-import HeaderDashboard from "@/components/header/header-dashboard";
+import Header from "@/components/header";
 import React, { ReactNode } from "react";
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 const DashboardLayout = ({ children }: Props) => {
   return (
     <div className="flex h-full flex-col">
-      <HeaderDashboard />
+      <Header />
       <main className="flex-1 p-8">{children}</main>
     </div>
   );

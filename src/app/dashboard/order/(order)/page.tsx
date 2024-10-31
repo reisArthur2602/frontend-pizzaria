@@ -7,7 +7,7 @@ const OrderPage = async () => {
   const orders = await GetOrder();
 
   return (
-    <div>
+    <>
       <section className="mb-9 flex justify-between">
         <div>
           <h1 className="text-xl font-bold">Histórico de vendas</h1>
@@ -18,7 +18,7 @@ const OrderPage = async () => {
         <Button variant={"ghost"}>Exportar Relatório</Button>
       </section>
       <TableOrder orders={orders} />
-    </div>
+    </>
   );
 };
 

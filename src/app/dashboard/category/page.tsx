@@ -6,7 +6,7 @@ const CategoryPage = async () => {
   const categories = await GetCategory();
 
   return (
-    <div>
+    <>
       <section className="mb-9 flex justify-between">
         <div>
           <h1 className="text-xl font-bold">Categorias</h1>
@@ -16,7 +16,7 @@ const CategoryPage = async () => {
       </section>
 
       <TableCategory categories={categories} />
-    </div>
+    </>
   );
 };
 

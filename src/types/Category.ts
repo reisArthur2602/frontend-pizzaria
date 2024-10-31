@@ -1,6 +1,7 @@
 export type CategoryRequest = {
   name: string;
 };
+
 export type CategoryResponse = {
   id: string;
   name: string;

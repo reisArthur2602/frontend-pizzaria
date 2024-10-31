@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import { LINKS_HEADER_DASHBOARD } from "@/contants/links";
 
-const HeaderDashboard = () => {
+const Header = () => {
   return (
     <header className="bg-primary shadow-sm">
       <nav className="flex h-16 items-center justify-between px-8 text-white">
@@ -24,4 +24,4 @@ const HeaderDashboard = () => {
   );
 };
 
-export default HeaderDashboard;
+export default Header;
