@@ -6,7 +6,7 @@ import { LINKS_HEADER_DASHBOARD } from "@/contants/links";
 
 const Header = () => {
   return (
-    <header className="bg-primary shadow-sm">
+    <header className="bg-primary shadow-sm print:hidden">
       <nav className="flex h-16 items-center justify-between px-8 text-white">
         <Link href={"/dashboard"} className="text-xl font-bold text-white">
           Painel Administrativo

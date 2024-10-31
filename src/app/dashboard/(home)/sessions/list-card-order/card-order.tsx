@@ -9,8 +9,6 @@ import {
 
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { Button } from "@/components/ui/button";
-import { Printer } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 
@@ -20,12 +18,15 @@ import { calculateTotalItemsOrder } from "@/utils/calculate-total-items-order";
 import DeleteOrderCardButton from "./delete-order-card-button";
 import FinishOrderCardButton from "./finish-order-card-button";
 import CardItem from "@/components/card-item";
+import PrintOrderCardButton from "./print-order-card-button";
 
 type Props = {
   order: OrderResponse;
+  // eslint-disable-next-line no-unused-vars
+  onPrint: (order: OrderResponse) => void;
 };
 
-const CardOrder = ({ order }: Props) => {
+const CardOrder = ({ order, onPrint }: Props) => {
   const formatedCurrentDate = format(
     new Date(order.created_at),
     "dd/MM/yyyy, HH:mm",
@@ -37,7 +38,7 @@ const CardOrder = ({ order }: Props) => {
   const formatedPrice = formatPrice(calculateTotalItemsOrder(order));
 
   return (
-    <Card className="w-full max-w-[400px] overflow-hidden">
+    <Card className="w-full max-w-[22.5rem] overflow-hidden print:hidden">
       <CardHeader className="bg-primary text-xl font-medium text-white">
         <CardTitle className="flex items-center justify-between gap-4 font-bold">
           <>{`M-${order.table}`}</>
@@ -45,14 +46,7 @@ const CardOrder = ({ order }: Props) => {
           <div className="flex items-center gap-3">
             <DeleteOrderCardButton id={order.id} />
             <FinishOrderCardButton id={order.id} />
-
-            <Button
-              variant={"secondary"}
-              size={"icon"}
-              className="bg-orange-600 text-white hover:bg-orange-700"
-            >
-              <Printer />
-            </Button>
+            <PrintOrderCardButton onPrint={onPrint} order={order} />
           </div>
         </CardTitle>
 
@@ -61,8 +55,8 @@ const CardOrder = ({ order }: Props) => {
         </CardDescription>
       </CardHeader>
 
-      <CardContent>
-        <div className="scrollbar-hidden flex h-80 w-full flex-col overflow-auto">
+      <CardContent className="px-4">
+        <div className="scrollbar-hidden flex h-80 w-full flex-col overflow-y-auto">
           {order.Item.map((item) => (
             <CardItem
               key={item.id}
@@ -76,7 +70,7 @@ const CardOrder = ({ order }: Props) => {
       </CardContent>
 
       <CardFooter className="flex items-center justify-between gap-4">
-        Total:<Badge variant={"secondary"}>{formatedPrice}</Badge>
+        Total:<Badge>{formatedPrice}</Badge>
       </CardFooter>
     </Card>
   );

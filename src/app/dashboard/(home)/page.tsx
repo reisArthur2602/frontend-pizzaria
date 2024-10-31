@@ -1,14 +1,13 @@
-import CardOrder from "./sessions/card/card-order";
-
 import { GetOrderInProductionCurrent } from "@/services/order/get-order-in-production-current";
 import OrderSwitch from "./sessions/order-switch/order-switch";
+import ListCardOrder from "./sessions/list-card-order/list-card-order";
 
 const DashboardPage = async () => {
   const currentOrders = await GetOrderInProductionCurrent();
 
   return (
-    <div>
-      <section className="mb-9 flex justify-between">
+    <>
+      <section className="mb-9 flex justify-between print:hidden">
         <div>
           <h1 className="text-xl font-bold">Últimos Pedidos</h1>
           <p className="text-sm text-zinc-400">
@@ -18,12 +17,8 @@ const DashboardPage = async () => {
         <OrderSwitch />
       </section>
 
-      <section className="grid grid-cols-5 gap-6">
-        {currentOrders.map((order) => (
-          <CardOrder order={order} key={order.id} />
-        ))}
-      </section>
-    </div>
+      <ListCardOrder orders={currentOrders} />
+    </>
   );
 };
 

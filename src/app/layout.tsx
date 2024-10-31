@@ -18,7 +18,11 @@ export default function RootLayout({
     <html lang="pt-br">
       <body className={`${inter.className} antialiased`}>
         {children}
-        <Toaster />
+        <Toaster
+          className="print:hidden"
+          position="bottom-center"
+          theme="light"
+        />
       </body>
     </html>
   );
