@@ -33,7 +33,7 @@ const ProductCart = ({ item }: Props) => {
       <div className="flex items-center gap-4 text-sm">
         <div className="relative h-20 w-24">
           <Image
-            src={`${process.env.NEXT_PUBLIC_API_URL}/files/${item.product.image_url}`}
+            src={item.product.image_url}
             alt={item.product.name}
             className="rounded-sm object-cover"
             fill

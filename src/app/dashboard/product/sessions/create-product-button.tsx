@@ -53,11 +53,13 @@ const CreateProductButton = ({ categories }: Props) => {
 
     const formData = new FormData();
 
+
     formData.append("name", credentials.name);
     formData.append("price", credentials.price);
     formData.append("description", credentials.description);
     formData.append("category_id", category_id);
     formData.append("file", image);
+
 
     const response = await CreateProduct(formData);
 

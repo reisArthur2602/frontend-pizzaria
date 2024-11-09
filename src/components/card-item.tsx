@@ -15,7 +15,7 @@ const CardItem = ({ image_url, price, product_name, quantity }: ICardItem) => {
       <div className="flex flex-1 items-center gap-3 text-xs">
         <div className="relative h-16 w-20">
           <Image
-            src={`${process.env.NEXT_PUBLIC_API_URL}/files/${image_url}`}
+            src={image_url}
             alt={product_name}
             fill
             className="object-fill"

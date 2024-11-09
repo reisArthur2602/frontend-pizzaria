@@ -43,7 +43,7 @@ const TableProduct = ({ products }: Props) => {
             <TableCell>
               <div className="relative h-20 w-32">
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_API_URL}/files/${product.image_url}`}
+                  src={product.image_url}
                   fill
                   alt={product.name}
                   className="object-cover"

@@ -11,7 +11,7 @@ const ProductItemTrigger = ({ product }: Props) => {
     <div className="flex w-full cursor-pointer flex-col items-center justify-center gap-4 hover:animate-pulse">
       <div className="relative h-[15rem] w-full">
         <Image
-          src={`${process.env.NEXT_PUBLIC_API_URL}/files/${product.image_url}`}
+          src={product.image_url}
           alt={product.name}
           fill
           className="object-cover"

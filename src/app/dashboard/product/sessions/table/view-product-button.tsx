@@ -36,7 +36,7 @@ const ViewProductButton = ({ product }: Props) => {
 
         <div className="relative h-60">
           <Image
-            src={`${process.env.NEXT_PUBLIC_API_URL}/files/${product.image_url}`}
+            src={product.image_url}
             alt={product.name}
             fill
             className="object-cover"
