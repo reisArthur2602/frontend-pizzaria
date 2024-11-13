@@ -13,9 +13,22 @@ import Link from "next/link";
 import { SessionUser } from "@/services/user/session-user";
 import { sessionUserSchema } from "@/lib/zod/User";
 
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+
 const FormLogin = () => {
   const form = useForm<UserRequest>({
     resolver: zodResolver(sessionUserSchema),
+    defaultValues: {
+      email: "guest@guest.com",
+      password: "123456",
+    },
   });
 
   const router = useRouter();
@@ -32,10 +45,7 @@ const FormLogin = () => {
   });
 
   return (
-    <form
-      onSubmit={handleSession}
-      className="flex w-full max-w-96 flex-col gap-6"
-    >
+    <div className="flex w-full max-w-96 flex-col gap-6">
       <div className="flex items-center justify-center">
         <Logo />
       </div>
@@ -47,20 +57,46 @@ const FormLogin = () => {
         </p>
       </div>
 
-      <Input placeholder="Digite seu email" {...form.register("email")} />
-      <Input
-        placeholder="******"
-        type="password"
-        {...form.register("password")}
-      />
-      <Button>Acessar</Button>
+      <Form {...form}>
+        <form onSubmit={handleSession} className="space-y-6">
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Nome</FormLabel>
+                <FormControl>
+                  <Input placeholder="Digite o seu email" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Senha</FormLabel>
+                <FormControl>
+                  <Input placeholder="******" type="password" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <Button className="w-full">Acessar</Button>
+        </form>
+      </Form>
+
       <Link
         href="/sign/register"
         className="text-center text-sm transition-all hover:text-primary"
       >
         Ainda não possui uma conta? Clique Aqui
       </Link>
-    </form>
+    </div>
   );
 };
 
