@@ -1,9 +1,12 @@
-import React from "react";
-
+import { Metadata } from "next";
 import CreateProductButton from "./sessions/create-product-button";
 import TableProduct from "./sessions/table/table-products";
 import { GetCategory } from "@/services/category/get-category";
 import { GetProduct } from "@/services/product/get-product";
+
+export const metadata: Metadata = {
+  title: "Produtos - Painel Admin",
+};
 
 const ProductPage = async () => {
   const categories = await GetCategory();

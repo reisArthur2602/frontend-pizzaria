@@ -1,11 +1,14 @@
-import React from "react";
-
 import { redirect } from "next/navigation";
 import { GetCategory } from "@/services/category/get-category";
 import CartOrder from "./sessions/cart/cart-order";
 
 import Products from "./sessions/products/products";
 import { GetOrderById } from "@/services/order/get-order-by-id";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Pedido em Rascunho - Painel Admin",
+};
 
 type Props = {
   params: { id: string };
@@ -13,7 +16,7 @@ type Props = {
 
 const DraftPage = async ({ params }: Props) => {
   const categories = await GetCategory();
-
+  const hasCategories = categories.length > 0;
   const id = params.id;
 
   const order = await GetOrderById(id).catch(() => {
@@ -34,7 +37,9 @@ const DraftPage = async ({ params }: Props) => {
           <CartOrder order={order} />
         </div>
 
-        <Products categories={categories} order_id={order.id} />
+        {hasCategories && (
+          <Products categories={categories} order_id={order.id} />
+        )}
       </div>
     </>
   );

@@ -2,6 +2,11 @@ import { Button } from "@/components/ui/button";
 
 import TableOrder from "./sessions/table/table-order";
 import { GetOrder } from "@/services/order/get-order";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Histórico de vendas - Painel Admin",
+};
 
 const OrderPage = async () => {
   const orders = await GetOrder();
