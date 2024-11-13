@@ -1,7 +1,8 @@
 import { GetCategory } from "@/services/category/get-category";
 import CreateCategoryButton from "./sessions/create-category-button";
-import TableCategory from "./sessions/table/table-category";
 import { Metadata } from "next";
+import { DataTable } from "@/components/ui/data-table";
+import { categoryColumns } from "./sessions/table/category.columns";
 
 export const metadata: Metadata = {
   title: "Categorias - Painel Admin",
@@ -20,7 +21,7 @@ const CategoryPage = async () => {
         <CreateCategoryButton />
       </section>
 
-      <TableCategory categories={categories} />
+      <DataTable columns={categoryColumns} data={categories} />
     </>
   );
 };
