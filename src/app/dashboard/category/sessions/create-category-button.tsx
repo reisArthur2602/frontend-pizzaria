@@ -13,7 +13,6 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { useForm } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,10 +22,21 @@ import { CategoryRequest } from "@/types/Category";
 
 import { registerCategorySchema } from "@/lib/zod/Category";
 import { CreateCategory } from "@/services/category/create-category";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
 const CreateCategoryButton = () => {
   const form = useForm<CategoryRequest>({
     resolver: zodResolver(registerCategorySchema),
+    defaultValues: {
+      name: "",
+    },
   });
 
   const handleCreateCategory = form.handleSubmit(async (credentials) => {
@@ -53,26 +63,35 @@ const CreateCategoryButton = () => {
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleCreateCategory}>
-          <div className="mb-4 flex items-center gap-3 text-right">
-            <Label htmlFor="name">Nome</Label>
-            <Input
-              id="name"
-              {...form.register("name")}
-              placeholder="Nome da categoria"
-              autoFocus
+        <Form {...form}>
+          <form onSubmit={handleCreateCategory} className="space-y-4">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Nome</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Digite o nome da categoria..."
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-          </div>
 
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button variant="secondary" type="button">
-                Cancelar
-              </Button>
-            </DialogClose>
-            <Button>Salvar</Button>
-          </DialogFooter>
-        </form>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button variant="secondary" type="button">
+                  Cancelar
+                </Button>
+              </DialogClose>
+              <Button>Salvar</Button>
+            </DialogFooter>
+          </form>
+        </Form>
       </DialogContent>
     </Dialog>
   );
