@@ -12,10 +12,19 @@ import Logo from "@/components/logo";
 import Link from "next/link";
 import { RegisterUser } from "@/services/user/register-user";
 import { registerUserSchema } from "@/lib/zod/User";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
 const FormRegister = () => {
   const form = useForm<UserRequest>({
     resolver: zodResolver(registerUserSchema),
+    defaultValues: { email: "", password: "" },
   });
 
   const router = useRouter();
@@ -32,10 +41,7 @@ const FormRegister = () => {
   });
 
   return (
-    <form
-      onSubmit={handleRegister}
-      className="flex w-full max-w-96 flex-col gap-6"
-    >
+    <div className="flex w-full max-w-96 flex-col gap-6">
       <div className="flex items-center justify-center">
         <Logo />
       </div>
@@ -47,24 +53,46 @@ const FormRegister = () => {
         </p>
       </div>
 
-      <Input
-        placeholder="Digite seu email"
-        type="text"
-        {...form.register("email")}
-      />
-      <Input
-        placeholder="******"
-        type="password"
-        {...form.register("password")}
-      />
-      <Button>Cadastrar</Button>
+      <Form {...form}>
+        <form onSubmit={handleRegister} className="space-y-6">
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Nome</FormLabel>
+                <FormControl>
+                  <Input placeholder="Digite o seu email" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Senha</FormLabel>
+                <FormControl>
+                  <Input placeholder="******" type="password" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <Button className="w-full">Cadastrar</Button>
+        </form>
+      </Form>
+
       <Link
-        href="/sign"
+        href="/sign/register"
         className="text-center text-sm transition-all hover:text-primary"
       >
         Já possui uma conta? Clique Aqui
       </Link>
-    </form>
+    </div>
   );
 };
 
