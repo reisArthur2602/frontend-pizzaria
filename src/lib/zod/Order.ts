@@ -1,5 +1,5 @@
 import { z } from "zod";
 
 export const registerOrderSchema = z.object({
-  table: z.coerce.number({ message: "O campo mesa é obrigatório" }),
+  table: z.coerce.number({ invalid_type_error: "A mesa deve ser um número" }),
 });

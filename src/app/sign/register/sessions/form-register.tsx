@@ -26,7 +26,6 @@ const FormRegister = () => {
     resolver: zodResolver(registerUserSchema),
     defaultValues: { email: "", password: "" },
   });
-
   const router = useRouter();
 
   const handleRegister = form.handleSubmit(async (credentials) => {

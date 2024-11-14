@@ -2,9 +2,8 @@ export type ProductRequest = {
   name: string;
   category_id: string;
   description: string;
-  image_url: File;
   price: number;
-  created_at: string;
+  image_url: File | null;
 };
 
 export type ProductResponse = {

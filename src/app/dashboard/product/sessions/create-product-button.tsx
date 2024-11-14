@@ -13,9 +13,7 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 
-import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
@@ -24,42 +22,73 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 
 import { toast } from "sonner";
 
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { CategoryResponse } from "@/types/Category";
 import { registerProductSchema } from "@/lib/zod/Product";
 import { CreateProduct } from "@/services/product/create-product";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { ProductRequest } from "@/types/Product";
+import { Textarea } from "@/components/ui/textarea";
+import { MoneyInput } from "@/components/money-input";
+import Dropzone from "react-dropzone";
+import Image from "next/image";
 
 type Props = {
   categories: CategoryResponse[] | [];
 };
 
 const CreateProductButton = ({ categories }: Props) => {
-  const [category_id, setCategoryId] = useState("");
-  const [image, setImage] = useState<File>();
+  const [image, setImage] = useState<File | null>(null);
+  const [preview, setPreview] = useState<string | null>(null);
 
-  const form = useForm({ resolver: zodResolver(registerProductSchema) });
+  const form = useForm<ProductRequest>({
+    resolver: zodResolver(registerProductSchema),
+    defaultValues: {
+      name: "",
+      category_id: categories[0].id,
+      description: "",
+      price: 10,
+      image_url: null,
+    },
+  });
+
+  const onDrop = (acceptedFiles: File[]) => {
+    const file = acceptedFiles[0];
+    setImage(file);
+    setPreview(URL.createObjectURL(file));
+  };
+
+  const onCloseDialog = () => {
+    setPreview(null);
+    form.reset();
+  };
 
   const handleRegisterProduct = form.handleSubmit(async (credentials) => {
     if (!image) {
-      toast.error("A imagem do produto é obrigatória");
+      toast.error("Por favor, selecione uma imagem.");
       return;
     }
 
     const formData = new FormData();
 
-
     formData.append("name", credentials.name);
-    formData.append("price", credentials.price);
+    formData.append("category_id", credentials.category_id);
     formData.append("description", credentials.description);
-    formData.append("category_id", category_id);
-    formData.append("file", image);
-
+    formData.append("price", credentials.price.toString());
+    formData.append("file", credentials.image_url as File);
 
     const response = await CreateProduct(formData);
 
@@ -68,21 +97,10 @@ const CreateProductButton = ({ categories }: Props) => {
     }
 
     form.reset();
+    setImage(null);
+    setPreview(null);
     toast.success(response.body);
   });
-
-  const handleFile = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const image = e.target.files[0];
-
-      if (image.type !== "image/jpeg" && image.type !== "image/png") {
-        toast.error("Insira uma imagem no formato PNG ou JPEG/JPG");
-        return;
-      }
-
-      setImage(image);
-    }
-  };
 
   return (
     <Dialog>
@@ -98,69 +116,154 @@ const CreateProductButton = ({ categories }: Props) => {
           </DialogDescription>
         </DialogHeader>
 
-        <form className="flex flex-col gap-4" onSubmit={handleRegisterProduct}>
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="image_url">Imagem</Label>
-            <input
-              id="image_url"
-              type="file"
-              accept="image/png, image/jpeg"
-              onChange={handleFile}
+        <Form {...form}>
+          <form className="space-y-6" onSubmit={handleRegisterProduct}>
+            <FormField
+              name="image_url"
+              control={form.control}
+              render={() => (
+                <FormItem>
+                  <FormLabel>Imagem</FormLabel>
+                  <Controller
+                    control={form.control}
+                    name="image_url"
+                    render={({ field: { onChange } }) => (
+                      <Dropzone
+                        onDrop={(acceptedFiles) => {
+                          onChange(acceptedFiles[0]);
+                          onDrop(acceptedFiles);
+                        }}
+                        accept={{ "image/jpeg": [], "image/png": [] }}
+                        maxFiles={1}
+                      >
+                        {({ getRootProps, getInputProps }) => (
+                          <div
+                            {...getRootProps()}
+                            className="rounded border-2 border-dashed p-4"
+                          >
+                            <input {...getInputProps()} />
+                            {preview ? (
+                              <Image
+                                src={preview}
+                                alt="Preview"
+                                height={128}
+                                width={128}
+                                className="object-cover"
+                              />
+                            ) : (
+                              <p>
+                                Arraste e solte uma imagem ou clique para
+                                selecionar
+                              </p>
+                            )}
+                          </div>
+                        )}
+                      </Dropzone>
+                    )}
+                  />
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-          </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="category_id">Categoria</Label>
+            <FormField
+              control={form.control}
+              name="category_id"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Categoria</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Selecione uma Categoria" />
+                      </SelectTrigger>
+                    </FormControl>
 
-            <Select onValueChange={(e) => setCategoryId(e)} value={category_id}>
-              <SelectTrigger id="category_id">
-                <SelectValue placeholder="Selecione uma categoria" />
-              </SelectTrigger>
-              <SelectContent>
-                {categories.map((category) => (
-                  <SelectItem value={category.id} key={category.id}>
-                    {category.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+                    <SelectContent className="capitalize">
+                      {categories.map((category) => (
+                        <SelectItem key={category.id} value={category.id}>
+                          {category.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
 
-          <div className="flex gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="name">Nome</Label>
-              <Input
-                id="name"
-                placeholder="Nome do Produto"
-                autoFocus
-                {...form.register("name")}
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="price">Valor</Label>
-              <Input id="price" placeholder="R$" {...form.register("price")} />
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="description">Descrição</Label>
-            <Textarea
-              id="description"
-              placeholder="Descreva o produto..."
-              {...form.register("description")}
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-          </div>
 
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button variant="secondary" type="button">
-                Cancelar
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Nome</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Digite o nome do produto." {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="price"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Preço</FormLabel>
+                  <FormControl>
+                    <MoneyInput
+                      placeholder="Digite o preço"
+                      value={field.value}
+                      onValueChange={({ floatValue }) =>
+                        field.onChange(floatValue)
+                      }
+                      onBlur={field.onBlur}
+                      disabled={field.disabled}
+                    />
+                  </FormControl>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Descrição</FormLabel>
+                  <FormControl>
+                    <Textarea placeholder="Descreva o produto..." {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button
+                  variant="secondary"
+                  type="button"
+                  disabled={form.formState.isSubmitting}
+                  onClick={onCloseDialog}
+                >
+                  Cancelar
+                </Button>
+              </DialogClose>
+              <Button type="submit" disabled={form.formState.isSubmitting}>
+                Salvar
               </Button>
-            </DialogClose>
-            <Button>Salvar</Button>
-          </DialogFooter>
-        </form>
+            </DialogFooter>
+          </form>
+        </Form>
       </DialogContent>
     </Dialog>
   );

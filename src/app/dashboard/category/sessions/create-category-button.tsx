@@ -64,7 +64,7 @@ const CreateCategoryButton = () => {
         </DialogHeader>
 
         <Form {...form}>
-          <form onSubmit={handleCreateCategory} className="space-y-4">
+          <form onSubmit={handleCreateCategory} className="space-y-6">
             <FormField
               control={form.control}
               name="name"

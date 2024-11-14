@@ -13,7 +13,6 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -23,6 +22,14 @@ import { useRouter } from "next/navigation";
 import { OrderRequest } from "@/types/Order";
 import { registerOrderSchema } from "@/lib/zod/Order";
 import { CreateOrder } from "@/services/order/create-order";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
 const CreateOrderButton = () => {
   const form = useForm<OrderRequest>({
@@ -55,26 +62,32 @@ const CreateOrderButton = () => {
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleCreateOrder}>
-          <div className="mb-4 flex items-center gap-3 text-right">
-            <Label htmlFor="name">Mesa</Label>
-            <Input
-              id="name"
-              {...form.register("table")}
-              placeholder="Número da mesa ex:. 1"
-              autoFocus
+        <Form {...form}>
+          <form onSubmit={handleCreateOrder} className="space-y-6">
+            <FormField
+              control={form.control}
+              name="table"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Mesa</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Digite o número da mesa" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-          </div>
 
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button variant="secondary" type="button">
-                Cancelar
-              </Button>
-            </DialogClose>
-            <Button>Salvar</Button>
-          </DialogFooter>
-        </form>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button variant="secondary" type="button">
+                  Cancelar
+                </Button>
+              </DialogClose>
+              <Button>Salvar</Button>
+            </DialogFooter>
+          </form>
+        </Form>
       </DialogContent>
     </Dialog>
   );
