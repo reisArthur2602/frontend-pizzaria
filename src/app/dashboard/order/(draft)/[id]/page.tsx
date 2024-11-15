@@ -15,7 +15,10 @@ type Props = {
 };
 
 const DraftPage = async ({ params }: Props) => {
-  const categories = await GetCategory();
+  const categories = (await GetCategory()).filter(
+    (c) => c.Product.length !== 0,
+  );
+
   const hasCategories = categories.length > 0;
   const id = params.id;
 

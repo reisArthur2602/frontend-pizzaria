@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dialog";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -27,9 +27,9 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { TableInput } from "@/components/table-input";
 
 const CreateOrderButton = () => {
   const form = useForm<OrderRequest>({
@@ -69,10 +69,18 @@ const CreateOrderButton = () => {
               name="table"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Mesa</FormLabel>
                   <FormControl>
-                    <Input placeholder="Digite o número da mesa" {...field} />
+                    <TableInput
+                      placeholder="Digite o número da mesa"
+                      value={field.value}
+                      onValueChange={({ floatValue }) =>
+                        field.onChange(floatValue)
+                      }
+                      onBlur={field.onBlur}
+                      disabled={field.disabled}
+                    />
                   </FormControl>
+
                   <FormMessage />
                 </FormItem>
               )}
@@ -80,11 +88,15 @@ const CreateOrderButton = () => {
 
             <DialogFooter>
               <DialogClose asChild>
-                <Button variant="secondary" type="button">
+                <Button
+                  variant="secondary"
+                  type="button"
+                  disabled={form.formState.isSubmitting}
+                >
                   Cancelar
                 </Button>
               </DialogClose>
-              <Button>Salvar</Button>
+              <Button disabled={form.formState.isSubmitting}>Salvar</Button>
             </DialogFooter>
           </form>
         </Form>
