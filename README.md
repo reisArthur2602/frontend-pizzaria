@@ -26,8 +26,6 @@
     <img src="./public/screens/view-product.png" alt="Visualizar produto" width="480px">
     <img src="./public/screens/sales.png" alt="Tela de histórico de vendas" width="480px">
     <img src="./public/screens/view-sales.png" alt="Visualizar histórico de vendas" width="480px">
- 
-   
 </p>
 
 <h2 id="technologies">💻 Tecnologias</h2>
