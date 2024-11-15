@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { UserRequest } from "@/types/User";
 
-import Logo from "@/components/logo";
+import Logo from "@/app/dashboard/components/logo";
 import Link from "next/link";
 import { RegisterUser } from "@/services/user/register-user";
 import { registerUserSchema } from "@/lib/zod/User";
@@ -86,7 +86,7 @@ const FormRegister = () => {
       </Form>
 
       <Link
-        href="/sign/register"
+        href="/sign"
         className="text-center text-sm transition-all hover:text-primary"
       >
         Já possui uma conta? Clique Aqui

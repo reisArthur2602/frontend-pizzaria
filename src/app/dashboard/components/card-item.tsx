@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
-import { formatPrice } from "../utils/format-price";
+import { formatPrice } from "../../../utils/format-price";
 
 interface ICardItem {
   image_url: string;

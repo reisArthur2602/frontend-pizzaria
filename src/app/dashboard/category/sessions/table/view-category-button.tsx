@@ -13,7 +13,7 @@ import { format } from "date-fns";
 
 import { CategoryResponse } from "@/types/Category";
 
-import CardItem from "@/components/card-item";
+import CardItem from "@/app/dashboard/components/card-item";
 import { Button } from "@/components/ui/button";
 
 type Props = {

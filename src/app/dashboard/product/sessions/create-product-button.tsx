@@ -42,7 +42,7 @@ import {
 } from "@/components/ui/form";
 import { ProductRequest } from "@/types/Product";
 import { Textarea } from "@/components/ui/textarea";
-import { MoneyInput } from "@/components/money-input";
+import { MoneyInput } from "@/app/dashboard/components/money-input";
 import Dropzone from "react-dropzone";
 import Image from "next/image";
 

@@ -1,7 +1,11 @@
 import { z } from "zod";
 
 export const registerUserSchema = z.object({
-  email: z.string().trim().email("Insira um formato de email válido"),
+  email: z
+    .string()
+    .trim()
+    .min(1, "O email é obrigatório")
+    .email("Insira um formato de email válido"),
   password: z
     .string()
     .trim()
@@ -9,7 +13,11 @@ export const registerUserSchema = z.object({
 });
 
 export const sessionUserSchema = z.object({
-  email: z.string().trim().email("Insira um formato de email válido"),
+  email: z
+    .string()
+    .trim()
+    .min(1, "O email é obrigatório")
+    .email("Insira um formato de email válido"),
   password: z
     .string()
     .trim()

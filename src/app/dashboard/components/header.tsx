@@ -3,11 +3,12 @@
 import Link from "next/link";
 
 import { LINKS_HEADER_DASHBOARD } from "@/contants/links";
+import LogoutButton from "./logout-button";
 
 const Header = () => {
   return (
     <header className="bg-primary shadow-sm print:hidden">
-      <nav className="flex h-16 items-center justify-between px-8 text-white">
+      <nav className="flex h-14 items-center justify-between px-8 text-white">
         <Link href={"/dashboard"} className="text-xl font-bold text-white">
           Painel Administrativo
         </Link>
@@ -18,6 +19,7 @@ const Header = () => {
               {link.label}
             </Link>
           ))}
+          <LogoutButton />
         </div>
       </nav>
     </header>

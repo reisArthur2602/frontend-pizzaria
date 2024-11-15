@@ -14,7 +14,7 @@ import { OrderResponse } from "@/types/Order";
 import { format } from "date-fns";
 import { formatPrice } from "@/utils/format-price";
 import { calculateTotalItemsOrder } from "@/utils/calculate-total-items-order";
-import CardItem from "@/components/card-item";
+import CardItem from "@/app/dashboard/components/card-item";
 import { Button } from "@/components/ui/button";
 
 type Props = {

@@ -1,8 +1,8 @@
 import React, { forwardRef } from "react";
 import { NumericFormat, NumericFormatProps } from "react-number-format";
-import { Input, InputProps } from "./ui/input";
+import { Input, InputProps } from "../../../components/ui/input";
 
-export const TableInput = forwardRef(
+export const MoneyInput = forwardRef(
   (
     props: NumericFormatProps<InputProps>,
     ref: React.ForwardedRef<HTMLInputElement>,
@@ -10,9 +10,10 @@ export const TableInput = forwardRef(
     return (
       <NumericFormat
         {...props}
-        prefix="Mesa "
+        thousandSeparator="."
+        decimalSeparator=","
+        prefix="R$ "
         allowNegative={false}
-        decimalScale={0}
         customInput={Input}
         getInputRef={ref}
       />
@@ -20,4 +21,4 @@ export const TableInput = forwardRef(
   },
 );
 
-TableInput.displayName = "TableInput";
+MoneyInput.displayName = "MoneyInput";

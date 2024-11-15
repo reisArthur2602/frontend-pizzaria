@@ -17,7 +17,7 @@ import { formatPrice } from "@/utils/format-price";
 import { calculateTotalItemsOrder } from "@/utils/calculate-total-items-order";
 import DeleteOrderCardButton from "./delete-order-card-button";
 import FinishOrderCardButton from "./finish-order-card-button";
-import CardItem from "@/components/card-item";
+import CardItem from "@/app/dashboard/components/card-item";
 import PrintOrderCardButton from "./print-order-card-button";
 
 type Props = {

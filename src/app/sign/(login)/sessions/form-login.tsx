@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserRequest } from "@/types/User";
 
-import Logo from "@/components/logo";
+import Logo from "@/app/dashboard/components/logo";
 import Link from "next/link";
 import { SessionUser } from "@/services/user/session-user";
 import { sessionUserSchema } from "@/lib/zod/User";

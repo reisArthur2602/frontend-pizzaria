@@ -29,7 +29,7 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { TableInput } from "@/components/table-input";
+import { TableInput } from "@/app/dashboard/components/table-input";
 
 const CreateOrderButton = () => {
   const form = useForm<OrderRequest>({
