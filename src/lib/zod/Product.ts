@@ -13,7 +13,7 @@ export const registerProductSchema = z.object({
       message: "O valor deve ser um número positivo.",
     }),
 
-  category_id: z.string({ required_error: "A categoria é obrigatória" }),
+  category_id: z.string().min(1, { message: "A categoria é obrigatória" }),
   description: z.string().trim().min(1, {
     message: "A descrição é obrigatória.",
   }),

@@ -58,7 +58,7 @@ const CreateProductButton = ({ categories }: Props) => {
     resolver: zodResolver(registerProductSchema),
     defaultValues: {
       name: "",
-      category_id: categories[0].id,
+      category_id: "",
       description: "",
       price: 10,
       image_url: null,
