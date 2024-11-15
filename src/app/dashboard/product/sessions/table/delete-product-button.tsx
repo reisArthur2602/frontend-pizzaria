@@ -10,6 +10,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
 import { DeleteProduct } from "@/services/product/delete-product";
 import { Trash2 } from "lucide-react";
 
@@ -33,8 +34,10 @@ const DeleteProductButton = ({ id }: Props) => {
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger>
-        <Trash2 size={20} />
+      <AlertDialogTrigger asChild>
+        <Button variant="ghost" size="icon" className="text-muted-foreground">
+          <Trash2 size={20} />
+        </Button>
       </AlertDialogTrigger>
 
       <AlertDialogContent>

@@ -1,8 +1,10 @@
 import { Metadata } from "next";
 import CreateProductButton from "./sessions/create-product-button";
-import TableProduct from "./sessions/table/table-products";
+
 import { GetCategory } from "@/services/category/get-category";
 import { GetProduct } from "@/services/product/get-product";
+import { DataTable } from "@/components/ui/data-table";
+import { productColumns } from "./sessions/table/product.column";
 
 export const metadata: Metadata = {
   title: "Produtos - Painel Admin",
@@ -21,7 +23,7 @@ const ProductPage = async () => {
         </div>
         <CreateProductButton categories={categories} />
       </section>
-      <TableProduct products={products} />
+      <DataTable data={products} columns={productColumns} />
     </>
   );
 };

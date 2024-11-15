@@ -15,6 +15,7 @@ import { Badge } from "@/components/ui/badge";
 import { ProductResponse } from "@/types/Product";
 import { formatPrice } from "@/utils/format-price";
 import { format } from "date-fns";
+import { Button } from "@/components/ui/button";
 
 type Props = {
   product: ProductResponse;
@@ -23,8 +24,10 @@ type Props = {
 const ViewProductButton = ({ product }: Props) => {
   return (
     <Dialog>
-      <DialogTrigger>
-        <File size={20} />
+      <DialogTrigger asChild>
+        <Button variant="ghost" size="icon" className="text-muted-foreground">
+          <File size={20} />
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
