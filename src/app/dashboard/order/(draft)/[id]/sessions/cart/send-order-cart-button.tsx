@@ -17,7 +17,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 
 import { useRouter } from "next/navigation";
-import { SendOrder } from "@/services/order/send-order";
+import { UpdateStatusOrder } from "@/services/order/update-status-order";
 
 type Props = {
   id: string;
@@ -27,7 +27,7 @@ const SendOrderCartButton = ({ id }: Props) => {
   const router = useRouter();
 
   const handleSendOrder = async (id: string) => {
-    const response = await SendOrder(id);
+    const response = await UpdateStatusOrder(id);
 
     if (!response?.sucess) {
       return toast.error(response?.body);

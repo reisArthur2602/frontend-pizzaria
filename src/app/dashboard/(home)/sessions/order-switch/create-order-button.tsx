@@ -36,7 +36,7 @@ const CreateOrderButton = () => {
     resolver: zodResolver(registerOrderSchema),
   });
 
-  const router = useRouter();
+  const { replace, refresh } = useRouter();
 
   const handleCreateOrder = form.handleSubmit(async (credentials) => {
     const response = await CreateOrder(credentials);
@@ -44,8 +44,8 @@ const CreateOrderButton = () => {
     if (!response?.sucess) {
       return toast.error(response?.body);
     }
-
-    router.replace(`/dashboard/order/${response.body}`);
+    refresh();
+    replace(`/dashboard/order/${response.body}`);
   });
 
   return (

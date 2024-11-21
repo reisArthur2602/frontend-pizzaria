@@ -1,14 +1,14 @@
-import { GetOrderInProductionCurrent } from "@/services/order/get-order-in-production-current";
 import OrderSwitch from "./sessions/order-switch/order-switch";
 import ListCardOrder from "./sessions/list-card-order/list-card-order";
 import { Metadata } from "next";
+import { GetOrder } from "@/services/order/get-order";
 
 export const metadata: Metadata = {
   title: "Últimos Pedidos - Painel Admin",
 };
 
 const DashboardPage = async () => {
-  const currentOrders = await GetOrderInProductionCurrent();
+  const orders = await GetOrder("PRODUCTION");
 
   return (
     <>
@@ -22,7 +22,7 @@ const DashboardPage = async () => {
         <OrderSwitch />
       </section>
 
-      <ListCardOrder orders={currentOrders} />
+      <ListCardOrder orders={orders} />
     </>
   );
 };

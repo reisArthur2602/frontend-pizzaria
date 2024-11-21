@@ -16,7 +16,7 @@ import React from "react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
-import { FinishOrder } from "@/services/order/finish-order";
+import { UpdateStatusOrder } from "@/services/order/update-status-order";
 
 type Props = {
   id: string;
@@ -24,7 +24,7 @@ type Props = {
 
 const FinishOrderCardButton = ({ id }: Props) => {
   const handleFinishOrder = async (id: string) => {
-    const response = await FinishOrder(id);
+    const response = await UpdateStatusOrder(id, "COMPLETED");
 
     if (!response?.sucess) {
       return toast.error(response?.body);

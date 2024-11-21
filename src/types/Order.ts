@@ -2,11 +2,12 @@ export type OrderRequest = {
   table: number;
 };
 
+export type OrderStatus = "DRAFT" | "PRODUCTION" | "COMPLETED";
+
 export type OrderResponse = {
   id: string;
   table: number;
-  status: boolean;
-  draft: boolean;
+  status: OrderStatus;
   created_at: string;
   Item: {
     id: string;
