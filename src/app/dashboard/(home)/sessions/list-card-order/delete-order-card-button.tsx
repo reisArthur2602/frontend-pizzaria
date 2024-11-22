@@ -46,9 +46,7 @@ const DeleteOrderCardButton = ({ id }: Props) => {
 
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>
-            Deseja excluir o pedido em produção?
-          </AlertDialogTitle>
+          <AlertDialogTitle>Deseja excluir o pedido?</AlertDialogTitle>
           <AlertDialogDescription>
             Esta ação não pode ser desfeita. Isso excluirá permanentemente o
             pedido de nossos servidores.

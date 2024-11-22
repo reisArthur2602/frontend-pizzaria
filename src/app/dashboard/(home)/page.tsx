@@ -8,7 +8,9 @@ export const metadata: Metadata = {
 };
 
 const DashboardPage = async () => {
-  const orders = await GetOrder("PRODUCTION");
+  const orders = (await GetOrder()).filter(
+    (order) => order.status !== "COMPLETED",
+  );
 
   return (
     <>

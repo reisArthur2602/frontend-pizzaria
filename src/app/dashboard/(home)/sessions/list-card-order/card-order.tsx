@@ -19,6 +19,9 @@ import DeleteOrderCardButton from "./delete-order-card-button";
 import FinishOrderCardButton from "./finish-order-card-button";
 import CardItem from "@/app/dashboard/components/card-item";
 import PrintOrderCardButton from "./print-order-card-button";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 type Props = {
   order: OrderResponse;
@@ -36,17 +39,35 @@ const CardOrder = ({ order, onPrint }: Props) => {
   );
 
   const formatedPrice = formatPrice(calculateTotalItemsOrder(order));
-
+  const orderStatusIsDraft = order.status === "DRAFT";
   return (
     <Card className="w-full max-w-[22.5rem] overflow-hidden print:hidden">
-      <CardHeader className="bg-primary text-xl font-medium text-white">
+      <CardHeader
+        className={`${orderStatusIsDraft ? "bg-primary/50" : "bg-primary"} text-xl font-medium text-white`}
+      >
         <CardTitle className="flex items-center justify-between gap-4 font-bold">
           <>{`M-${order.table}`}</>
 
           <div className="flex items-center gap-3">
             <DeleteOrderCardButton id={order.id} />
-            <FinishOrderCardButton id={order.id} />
-            <PrintOrderCardButton onPrint={onPrint} order={order} />
+
+            {!orderStatusIsDraft ? (
+              <>
+                <FinishOrderCardButton id={order.id} />
+                <PrintOrderCardButton onPrint={onPrint} order={order} />
+              </>
+            ) : (
+              <Button
+                variant={"secondary"}
+                size={"icon"}
+                className="bg-orange-600 text-white hover:bg-orange-700"
+                asChild
+              >
+                <Link href={`/dashboard/order/${order.id}`}>
+                  <ArrowRight />
+                </Link>
+              </Button>
+            )}
           </div>
         </CardTitle>
 
